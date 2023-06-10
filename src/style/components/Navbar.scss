@@ -21,10 +21,6 @@ $icon-color: #a5a5a5;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.07);
   }
 
-  .main-nav {
-    margin-right: 100px;
-  }
-
   .filters {
     width: 40px;
     height: 40px;
@@ -93,7 +89,7 @@ $icon-color: #a5a5a5;
     }
 
     .menu {
-      display: none;
+      display: none !important;
       visibility: hidden;
     }
   }
@@ -144,6 +140,10 @@ $icon-color: #a5a5a5;
       }
     }
 
+    .filters:hover {
+      background-color: transparent;
+    }
+
     .action {
       margin-left: 0px;
 
@@ -162,7 +162,7 @@ $icon-color: #a5a5a5;
       }
 
       .menu {
-        display: block;
+        display: block !important;
         visibility: visible;
       }
     }
