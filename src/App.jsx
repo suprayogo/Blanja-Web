@@ -4,6 +4,11 @@ import "bootstrap/dist/js/bootstrap.min.js";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 import Dashboard from "./pages/Dashboard";
+<<<<<<< Updated upstream
+=======
+import Register from "./pages/Register";
+import RegisterSeller from "./pages/RegisterSeller";
+>>>>>>> Stashed changes
 import Login from "./pages/Login";
 import LoginSeller from "./pages/LoginSeller";
 
@@ -20,6 +25,14 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Dashboard />,
+  },
+  {
+    path: "/login",
+    element: <Login />,
+  },
+  {
+    path: "/login-seller",
+    element: <LoginSeller />,
   },
   {
     path: "/login",
