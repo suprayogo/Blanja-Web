@@ -4,6 +4,8 @@ import "bootstrap/dist/js/bootstrap.min.js";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 import Dashboard from "./pages/Dashboard";
+import Login from "./pages/Login";
+import LoginSeller from "./pages/LoginSeller";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
@@ -18,6 +20,14 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Dashboard />,
+  },
+  {
+    path: "/login",
+    element: <Login />,
+  },
+  {
+    path: "/login-seller",
+    element: <LoginSeller />,
   },
 ]);
 
