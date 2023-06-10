@@ -10,8 +10,9 @@ import {
   faSliders,
   faMagnifyingGlass,
   faShoppingCart,
+  faBars,
 } from "@fortawesome/free-solid-svg-icons";
-library.add(faSliders, faMagnifyingGlass, faShoppingCart);
+library.add(faSliders, faMagnifyingGlass, faShoppingCart, faBars);
 
 const router = createBrowserRouter([
   {
