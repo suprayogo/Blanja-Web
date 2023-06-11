@@ -8,4 +8,26 @@
     margin-top: 25px;
     margin-bottom: 25px;
   }
+
+  #new-product {
+    margin-top: 25px;
+    margin-bottom: 25px;
+  }
+
+  @media only screen and (max-width: 575px) {
+    #carousel {
+      margin-top: 24px;
+      margin-bottom: 12px;
+    }
+
+    #category-list {
+      margin-top: 12px;
+      margin-bottom: 12px;
+    }
+
+    #new-product {
+      margin-top: 12px;
+      margin-bottom: 12px;
+    }
+  }
 }

@@ -3,6 +3,8 @@ import "bootstrap/dist/js/bootstrap.min.js";
 
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
+import "./style/Globals.scss";
+
 import Dashboard from "./pages/Dashboard";
 import Register from "./pages/Register";
 import RegisterSeller from "./pages/RegisterSeller";
@@ -15,8 +17,9 @@ import {
   faMagnifyingGlass,
   faShoppingCart,
   faBars,
+  faStar,
 } from "@fortawesome/free-solid-svg-icons";
-library.add(faSliders, faMagnifyingGlass, faShoppingCart, faBars);
+library.add(faSliders, faMagnifyingGlass, faShoppingCart, faBars, faStar);
 
 const router = createBrowserRouter([
   {
