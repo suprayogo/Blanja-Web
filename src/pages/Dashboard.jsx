@@ -4,6 +4,7 @@ import Navbar from "../components/Navbar";
 
 import React from "react";
 import CarouselHome from "../components/CarouselHome";
+import CategoryList from "../components/CategoryList";
 
 function Dashboard() {
   return (
@@ -18,6 +19,12 @@ function Dashboard() {
             <div className="col-12">
               <CarouselHome />
             </div>
+          </div>
+        </section>
+
+        <section id="category-list">
+          <div className="container mt-4">
+            <CategoryList />
           </div>
         </section>
       </div>
