@@ -4,7 +4,7 @@ $icon-color: #a5a5a5;
 
 .Navbar {
   width: 100%;
-  position: fixed;
+  // position: fixed;
   top: 0;
   z-index: 1000;
 
@@ -95,10 +95,6 @@ $icon-color: #a5a5a5;
   }
 
   @media only screen and (max-width: 575px) {
-    * {
-      font-size: 95%;
-    }
-
     #blanja-header {
       height: 50px;
       padding-left: 5px;

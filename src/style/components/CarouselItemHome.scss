@@ -1,0 +1,41 @@
+.CarouselHome {
+  .style-item {
+    margin-left: 30px;
+    margin-right: 30px;
+  }
+
+  .item {
+    cursor: pointer;
+
+    .img-item {
+      border-radius: 15px;
+      width: 400px;
+      height: 200px;
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .title-item {
+        font-size: 2.5rem;
+        text-align: center;
+        text-shadow: 2px 2px 4px #000000;
+      }
+    }
+  }
+
+  @media only screen and (max-width: 575px) {
+    .item {
+      .img-item {
+        border-radius: 5px;
+        width: 200px;
+        height: 100px;
+
+        .title-item {
+          font-size: 1rem;
+        }
+      }
+    }
+  }
+}
