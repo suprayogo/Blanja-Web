@@ -57,7 +57,7 @@ function Navbar() {
                   <div className="col-auto btn-login">
                     <button
                       type="button"
-                      class="btn btn-primary border-2 rounded-pill"
+                      className="btn btn-primary border-2 rounded-pill"
                     >
                       Login
                     </button>
@@ -65,14 +65,14 @@ function Navbar() {
                   <div className="col-auto btn-regis">
                     <button
                       type="button"
-                      class="btn btn-light border-2 border rounded-pill"
+                      className="btn btn-light border-2 border rounded-pill"
                     >
                       Signup
                     </button>
                   </div>
                   <div className="col-auto d-flex justify-content-between align-items-center menu">
                     <button
-                      class="btn"
+                      className="btn"
                       type="button"
                       data-bs-toggle="collapse"
                       data-bs-target="#collapseExample"
@@ -92,12 +92,12 @@ function Navbar() {
           </div>
         </div>
         <div
-          class="row collapse justify-content-end text-end"
+          className="row collapse justify-content-end text-end"
           id="collapseExample"
         >
-          <div class="card">
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">
+          <div className="card">
+            <ul className="list-group list-group-flush">
+              <li className="list-group-item">
                 <Link
                   className="text-black text-decoration-none mb-3 text-center"
                   to="/"
@@ -105,7 +105,7 @@ function Navbar() {
                   Login
                 </Link>
               </li>
-              <li class="list-group-item">
+              <li className="list-group-item">
                 <Link
                   className="text-black text-decoration-none mb-3 text-center"
                   to="/"
