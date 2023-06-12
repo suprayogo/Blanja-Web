@@ -19,8 +19,19 @@ import {
   faShoppingCart,
   faBars,
   faStar,
+  faMinus,
+  faPlus,
 } from "@fortawesome/free-solid-svg-icons";
-library.add(faSliders, faMagnifyingGlass, faShoppingCart, faBars, faStar);
+import Detail from "./pages/Detail";
+library.add(
+  faSliders,
+  faMagnifyingGlass,
+  faShoppingCart,
+  faBars,
+  faStar,
+  faMinus,
+  faPlus
+);
 
 const router = createBrowserRouter([
   {
@@ -46,6 +57,10 @@ const router = createBrowserRouter([
   {
     path: "/category",
     element: <Products />,
+  },
+  {
+    path: "/detail",
+    element: <Detail />,
   },
 ]);
 
