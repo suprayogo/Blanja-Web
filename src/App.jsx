@@ -11,6 +11,7 @@ import RegisterSeller from "./pages/RegisterSeller";
 import Login from "./pages/Login";
 import LoginSeller from "./pages/LoginSeller";
 import Products from "./pages/Products";
+import Detail from "./pages/Detail";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
@@ -22,7 +23,6 @@ import {
   faMinus,
   faPlus,
 } from "@fortawesome/free-solid-svg-icons";
-import Detail from "./pages/Detail";
 library.add(
   faSliders,
   faMagnifyingGlass,
