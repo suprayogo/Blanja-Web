@@ -98,6 +98,82 @@ function Dashboard() {
             </div>
           </div>
         </section>
+
+        <section id="popular-product">
+          <div className="container mt-4">
+            <div className="row">
+              <h2 className="fw-bold lh-1">Popular</h2>
+              <p className="text-muted lh-1">
+                Find clothes that are trending recently
+              </p>
+            </div>
+            <div className="row row-cols-md-5 rows-cols-xs-2">
+              <div className="col">
+                <ProductCard
+                  image={"./assets/img/product.jpg"}
+                  title={"Men's Leather Jacket - Brown"}
+                  price={"100"}
+                  storeName={"Code Crafters"}
+                  rating={"4.8"}
+                />
+              </div>
+              <div className="col">
+                <ProductCard
+                  image={"./assets/img/product.jpg"}
+                  title={"Men's Leather Jacket - Brown"}
+                  price={"100"}
+                  storeName={"Code Crafters"}
+                  rating={"4.8"}
+                />
+              </div>
+              <div className="col">
+                <ProductCard
+                  image={"./assets/img/product.jpg"}
+                  title={"Men's Leather Jacket - Brown"}
+                  price={"100"}
+                  storeName={"Code Crafters"}
+                  rating={"4.8"}
+                />
+              </div>
+              <div className="col">
+                <ProductCard
+                  image={"./assets/img/product.jpg"}
+                  title={"Men's Leather Jacket - Brown"}
+                  price={"100"}
+                  storeName={"Code Crafters"}
+                  rating={"4.8"}
+                />
+              </div>
+              <div className="col">
+                <ProductCard
+                  image={"./assets/img/product.jpg"}
+                  title={"Men's Leather Jacket - Brown"}
+                  price={"100"}
+                  storeName={"Code Crafters"}
+                  rating={"4.8"}
+                />
+              </div>
+              <div className="col">
+                <ProductCard
+                  image={"./assets/img/product.jpg"}
+                  title={"Men's Leather Jacket - Brown"}
+                  price={"100"}
+                  storeName={"Code Crafters"}
+                  rating={"4.8"}
+                />
+              </div>
+              <div className="col">
+                <ProductCard
+                  image={"./assets/img/product.jpg"}
+                  title={"Men's Leather Jacket - Brown"}
+                  price={"100"}
+                  storeName={"Code Crafters"}
+                  rating={"4.8"}
+                />
+              </div>
+            </div>
+          </div>
+        </section>
       </div>
     </div>
   );
