@@ -2,6 +2,10 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
 
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import axios from "axios";
+
+import { store } from "./store";
+import { Provider } from "react-redux";
 
 import "./style/Globals.scss";
 
@@ -60,7 +64,7 @@ const router = createBrowserRouter([
     element: <Products />,
   },
   {
-    path: "/detail",
+    path: "/product/:id",
     element: <Detail />,
   },
   {
@@ -70,9 +74,23 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
+  axios.interceptors.request.use((config) => {
+    if (localStorage.getItem("token")) {
+      config.headers["Authorization"] = `Bearer ${localStorage.getItem(
+        "token"
+      )}`;
+    }
+
+    return config;
+  }, (error) => {
+    Promise.reject(error);
+  });
+
   return (
     <div className="App">
-      <RouterProvider router={router} />
+      <Provider store={store}>
+        <RouterProvider router={router} />
+      </Provider>
     </div>
   );
 }

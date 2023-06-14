@@ -55,20 +55,24 @@ function Navbar() {
                     />
                   </div>
                   <div className="col-auto btn-login">
-                    <button
-                      type="button"
-                      className="btn btn-primary border-2 rounded-pill"
-                    >
-                      Login
-                    </button>
+                    <Link to='/login'>
+                      <button
+                        type="button"
+                        className="btn btn-primary border-2 rounded-pill"
+                      >
+                        Login
+                      </button>
+                    </Link>
                   </div>
                   <div className="col-auto btn-regis">
-                    <button
-                      type="button"
-                      className="btn btn-light border-2 border rounded-pill"
-                    >
-                      Signup
-                    </button>
+                    <Link to='/register'>
+                      <button
+                        type="button"
+                        className="btn btn-light border-2 border rounded-pill"
+                      >
+                        Signup
+                      </button>
+                    </Link>
                   </div>
                   <div className="col-auto d-flex justify-content-between align-items-center menu">
                     <button
@@ -100,7 +104,7 @@ function Navbar() {
               <li className="list-group-item">
                 <Link
                   className="text-black text-decoration-none mb-3 text-center"
-                  to="/"
+                  to="/login"
                 >
                   Login
                 </Link>
@@ -108,7 +112,7 @@ function Navbar() {
               <li className="list-group-item">
                 <Link
                   className="text-black text-decoration-none mb-3 text-center"
-                  to="/"
+                  to="/register"
                 >
                   Register
                 </Link>

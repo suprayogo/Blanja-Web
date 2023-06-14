@@ -7,7 +7,29 @@ import CarouselHome from "../components/CarouselHome";
 import CategoryList from "../components/CategoryList";
 import ProductCard from "../components/ProductCard";
 
+import axios from "axios";
+
 function Dashboard() {
+  const [newProductList, setNewProductList] = React.useState([]);
+  const [popularProductList, setPopularProductList] = React.useState([]);
+  const [keyword, setKeyword] = React.useState("");
+
+  React.useEffect(() => {
+    axios
+      .get(`${process.env.REACT_APP_BASE_URL}/product/`)
+      .then((response) => {
+        const newProductData = response?.data?.data;
+        setNewProductList(newProductData);
+      });
+
+    axios
+      .get(`${process.env.REACT_APP_BASE_URL}/product/`)
+      .then((response) => {
+        const popularProductData = response?.data?.data;
+        setPopularProductList(popularProductData);
+      });
+  }, []);
+
   return (
     <div className="Dashboard">
       <div className="row">
@@ -32,69 +54,20 @@ function Dashboard() {
               <p className="text-muted lh-1">You’ve never seen it before!</p>
             </div>
             <div className="row row-cols-md-5 rows-cols-xs-2">
-              <div className="col">
-                <ProductCard
-                  image={"./assets/img/product.jpg"}
-                  title={"Men's Leather Jacket - Brown"}
-                  price={"100"}
-                  storeName={"Code Crafters"}
-                  rating={"4.8"}
-                />
-              </div>
-              <div className="col">
-                <ProductCard
-                  image={"./assets/img/product.jpg"}
-                  title={"Men's Leather Jacket - Brown"}
-                  price={"100"}
-                  storeName={"Code Crafters"}
-                  rating={"4.8"}
-                />
-              </div>
-              <div className="col">
-                <ProductCard
-                  image={"./assets/img/product.jpg"}
-                  title={"Men's Leather Jacket - Brown"}
-                  price={"100"}
-                  storeName={"Code Crafters"}
-                  rating={"4.8"}
-                />
-              </div>
-              <div className="col">
-                <ProductCard
-                  image={"./assets/img/product.jpg"}
-                  title={"Men's Leather Jacket - Brown"}
-                  price={"100"}
-                  storeName={"Code Crafters"}
-                  rating={"4.8"}
-                />
-              </div>
-              <div className="col">
-                <ProductCard
-                  image={"./assets/img/product.jpg"}
-                  title={"Men's Leather Jacket - Brown"}
-                  price={"100"}
-                  storeName={"Code Crafters"}
-                  rating={"4.8"}
-                />
-              </div>
-              <div className="col">
-                <ProductCard
-                  image={"./assets/img/product.jpg"}
-                  title={"Men's Leather Jacket - Brown"}
-                  price={"100"}
-                  storeName={"Code Crafters"}
-                  rating={"4.8"}
-                />
-              </div>
-              <div className="col">
-                <ProductCard
-                  image={"./assets/img/product.jpg"}
-                  title={"Men's Leather Jacket - Brown"}
-                  price={"100"}
-                  storeName={"Code Crafters"}
-                  rating={"4.8"}
-                />
-              </div>
+              {
+                newProductList.map((newProduct) => (
+                  <div className="col">
+                    <ProductCard
+                      productId={newProduct?.product_id}
+                      image={newProduct?.path[0].photo_path}
+                      title={newProduct?.product_name}
+                      price={newProduct?.product_price}
+                      storeName={"Code Crafters"}
+                      rating={"4.8"}
+                    />
+                  </div>
+                ))
+              }
             </div>
           </div>
         </section>
@@ -108,69 +81,20 @@ function Dashboard() {
               </p>
             </div>
             <div className="row row-cols-md-5 rows-cols-xs-2">
-              <div className="col">
-                <ProductCard
-                  image={"./assets/img/product.jpg"}
-                  title={"Men's Leather Jacket - Brown"}
-                  price={"100"}
-                  storeName={"Code Crafters"}
-                  rating={"4.8"}
-                />
-              </div>
-              <div className="col">
-                <ProductCard
-                  image={"./assets/img/product.jpg"}
-                  title={"Men's Leather Jacket - Brown"}
-                  price={"100"}
-                  storeName={"Code Crafters"}
-                  rating={"4.8"}
-                />
-              </div>
-              <div className="col">
-                <ProductCard
-                  image={"./assets/img/product.jpg"}
-                  title={"Men's Leather Jacket - Brown"}
-                  price={"100"}
-                  storeName={"Code Crafters"}
-                  rating={"4.8"}
-                />
-              </div>
-              <div className="col">
-                <ProductCard
-                  image={"./assets/img/product.jpg"}
-                  title={"Men's Leather Jacket - Brown"}
-                  price={"100"}
-                  storeName={"Code Crafters"}
-                  rating={"4.8"}
-                />
-              </div>
-              <div className="col">
-                <ProductCard
-                  image={"./assets/img/product.jpg"}
-                  title={"Men's Leather Jacket - Brown"}
-                  price={"100"}
-                  storeName={"Code Crafters"}
-                  rating={"4.8"}
-                />
-              </div>
-              <div className="col">
-                <ProductCard
-                  image={"./assets/img/product.jpg"}
-                  title={"Men's Leather Jacket - Brown"}
-                  price={"100"}
-                  storeName={"Code Crafters"}
-                  rating={"4.8"}
-                />
-              </div>
-              <div className="col">
-                <ProductCard
-                  image={"./assets/img/product.jpg"}
-                  title={"Men's Leather Jacket - Brown"}
-                  price={"100"}
-                  storeName={"Code Crafters"}
-                  rating={"4.8"}
-                />
-              </div>
+              {
+                popularProductList.map((popularProduct) => (
+                  <div className="col">
+                    <ProductCard
+                      productId={popularProduct?.product_id}
+                      image={popularProduct?.path[0].photo_path}
+                      title={popularProduct?.product_name}
+                      price={popularProduct?.product_price}
+                      storeName={"Code Crafters"}
+                      rating={"4.8"}
+                    />
+                  </div>
+                ))
+              }
             </div>
           </div>
         </section>

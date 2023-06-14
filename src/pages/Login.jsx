@@ -1,8 +1,66 @@
 import React from "react";
 import "../style/pages/Login.scss"
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import Swal from "sweetalert2";
+import { useDispatch, useSelector } from "react-redux";
+import { addAuth } from '../reducers/auth';
 
 function Login() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
+
+  const state = useSelector((reducer) => reducer.auth);
+
+  React.useEffect(() => {
+    if (localStorage.getItem("auth") === "true" || state.auth) {
+      navigate("/");
+    }
+  }, []);
+
+  const handleLogin = () => {
+    // show loading before axios finish
+    Swal.fire({
+      title: "Please wait...",
+      allowOutsideClick: false,
+      didOpen: () => {
+        Swal.showLoading();
+      },
+    });
+
+    axios
+      .post(`${process.env.REACT_APP_BASE_URL}/auth/customer/login`, {
+        email: email,
+        password: password,
+      })
+      .then((result) => {
+        Swal.fire({
+          title: "Login Success",
+          text: "Login success, redirect to app...",
+          icon: "success",
+        }).then(() => {
+          console.log(result);
+          localStorage.setItem("auth", "true");
+          localStorage.setItem("userId", result?.data?.data?.user?.id);
+          localStorage.setItem("userName", result?.data?.data?.user?.name);
+          localStorage.setItem("userPhoto", result?.data?.data?.user?.profile_photo);
+          localStorage.setItem("token", result?.data?.data?.token);
+          dispatch(addAuth(result));
+          navigate("/");
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+        Swal.fire({
+          title: "Login Failed",
+          text: error?.response?.data?.message ?? "Something wrong in our app",
+          icon: "error",
+        });
+      });
+  };
 
 
   return (
@@ -43,7 +101,7 @@ function Login() {
               <input
                 type="radio"
                 className="btn-check"
-          
+
                 name="btnradio"
                 id="seller"
                 autocomplete="off"
@@ -56,7 +114,10 @@ function Login() {
                 Seller
               </label>
             </div>
-            <form>
+            <form
+              onSubmit={(event) => {
+                event.preventDefault();
+              }}>
               <div>
                 <label for="exampleInputEmail1" className="form-label"></label>
                 <input
@@ -65,6 +126,7 @@ function Login() {
                   id="exampleInputEmail1"
                   aria-describedby="emailHelp"
                   placeholder="Email"
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
               <div className="mb-3">
@@ -77,21 +139,23 @@ function Login() {
                   className="form-control  form-control-lg"
                   id="exampleInputPassword1"
                   placeholder="Password"
+                  onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
-              <small>
+              {/* <small>
                 <Link
                   to={"/forget.html"}
                   className="d-block text-decoration-none text-right text-danger mt-3"
                 >
                   Forgot Password
                 </Link>
-              </small>
+              </small> */}
 
-              <div className="d-grid mt-3">
+              <div className="d-grid mt-4">
                 <button
                   type="submit"
                   className="btn btn-danger btn-lg rounded-pill"
+                  onClick={handleLogin}
                 >
                   Login
                 </button>

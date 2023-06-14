@@ -1,8 +1,60 @@
 import React from "react";
 import "../style/pages/Register.scss"
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom"
+import axios from "axios";
+import Swal from "sweetalert2";
 
 function Register() {
+  const navigate = useNavigate();
+
+  const [name, setName] = React.useState("");
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
+
+  React.useEffect(() => {
+    if (localStorage.getItem("auth") === "true") {
+      navigate("/");
+    }
+  }, []);
+
+  const handleRegister = () => {
+
+    // show loading before axios finish
+    Swal.fire({
+      title: "Please wait...",
+      allowOutsideClick: false,
+      didOpen: () => {
+        Swal.showLoading();
+      },
+    });
+
+    axios
+      .post(`${process.env.REACT_APP_BASE_URL}/auth/customer/register`, {
+        name: name,
+        email: email,
+        password: password,
+      })
+      .then((result) => {
+        Swal.fire({
+          title: "Register Success",
+          text: "Register success, please login...",
+          icon: "success",
+        }).then(() => {
+          navigate("/login");
+        });
+      })
+      .catch((error) => {
+        Swal.fire({
+          title: "Register Failed",
+          text: error?.response?.data?.message ?? "Something wrong in our app",
+          icon: "error",
+          confirmButtonText: "Ok",
+          allowOutsideClick: false,
+          timer: 3000,
+        });
+      });
+  };
+
 
 
   return (
@@ -31,7 +83,7 @@ function Register() {
                 value="custommer"
                 id="custommer"
                 autocomplete="off"
-                
+
                 checked
               />
 
@@ -50,7 +102,7 @@ function Register() {
                 name="btnradio"
                 id="seller"
                 autocomplete="off"
-                
+
               />
               <label
                 style={{ height: "50px", width: "150px" }}
@@ -60,7 +112,10 @@ function Register() {
                 Seller
               </label>
             </div>
-            <form>
+            <form
+              onSubmit={(event) => {
+                event.preventDefault();
+              }}>
               <div>
                 <label for="name" className="form-label"></label>
                 <input
@@ -69,6 +124,7 @@ function Register() {
                   id="name"
                   aria-describedby="name"
                   placeholder="Name"
+                  onChange={(e) => setName(e.target.value)}
                 />
               </div>
 
@@ -80,6 +136,7 @@ function Register() {
                   id="exampleInputEmail1"
                   aria-describedby="emailHelp"
                   placeholder="Email"
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
               <div className="mb-3">
@@ -92,6 +149,7 @@ function Register() {
                   className="form-control form-control-lg"
                   id="exampleInputPassword1"
                   placeholder="Password"
+                  onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
 
@@ -99,6 +157,7 @@ function Register() {
                 <button
                   type="submit"
                   className="btn btn-danger btn-lg rounded-pill"
+                  onClick={handleRegister}
                 >
                   Register
                 </button>
