@@ -40,7 +40,7 @@ function CategoryList() {
             itemClass="style-item"
           >
             <div className="item" style={{ backgroundColor: "#CC0B04" }}>
-              <Link to={"#"} style={{ textDecoration: "none" }}>
+              <Link to={"/category/t-shirt"} style={{ textDecoration: "none" }}>
                 <div
                   className="img-item"
                   style={{
@@ -53,7 +53,7 @@ function CategoryList() {
             </div>
 
             <div className="item" style={{ backgroundColor: "#1C3391" }}>
-              <Link to={"#"} style={{ textDecoration: "none" }}>
+              <Link to={"/category/shorts"} style={{ textDecoration: "none" }}>
                 <div
                   className="img-item"
                   style={{
@@ -66,7 +66,7 @@ function CategoryList() {
             </div>
 
             <div className="item" style={{ backgroundColor: "#F67B02" }}>
-              <Link to={"#"} style={{ textDecoration: "none" }}>
+              <Link to={"/category/jacket"} style={{ textDecoration: "none" }}>
                 <div
                   className="img-item"
                   style={{
@@ -79,7 +79,7 @@ function CategoryList() {
             </div>
 
             <div className="item" style={{ backgroundColor: "#E31F51" }}>
-              <Link to={"#"} style={{ textDecoration: "none" }}>
+              <Link to={"/category/pants"} style={{ textDecoration: "none" }}>
                 <div
                   className="img-item"
                   style={{
@@ -92,7 +92,7 @@ function CategoryList() {
             </div>
 
             <div className="item" style={{ backgroundColor: "#5650D8" }}>
-              <Link to={"#"} style={{ textDecoration: "none" }}>
+              <Link to={"/category/high-heels"} style={{ textDecoration: "none" }}>
                 <div
                   className="img-item"
                   style={{
@@ -105,7 +105,7 @@ function CategoryList() {
             </div>
 
             <div className="item" style={{ backgroundColor: "#B5D850" }}>
-              <Link to={"#"} style={{ textDecoration: "none" }}>
+              <Link to={"/category/wristwatch"} style={{ textDecoration: "none" }}>
                 <div
                   className="img-item"
                   style={{
@@ -118,7 +118,7 @@ function CategoryList() {
             </div>
 
             <div className="item" style={{ backgroundColor: "#50C8D8" }}>
-              <Link to={"#"} style={{ textDecoration: "none" }}>
+              <Link to={"/category/handbag"} style={{ textDecoration: "none" }}>
                 <div
                   className="img-item"
                   style={{
@@ -131,7 +131,7 @@ function CategoryList() {
             </div>
 
             <div className="item" style={{ backgroundColor: "#AC50D8" }}>
-              <Link to={"#"} style={{ textDecoration: "none" }}>
+              <Link to={"/category/backpack"} style={{ textDecoration: "none" }}>
                 <div
                   className="img-item"
                   style={{
@@ -144,7 +144,7 @@ function CategoryList() {
             </div>
 
             <div className="item" style={{ backgroundColor: "#D85089" }}>
-              <Link to={"#"} style={{ textDecoration: "none" }}>
+              <Link to={"/category/socks"} style={{ textDecoration: "none" }}>
                 <div
                   className="img-item"
                   style={{
@@ -157,7 +157,7 @@ function CategoryList() {
             </div>
 
             <div className="item" style={{ backgroundColor: "#5086D8" }}>
-              <Link to={"#"} style={{ textDecoration: "none" }}>
+              <Link to={"/category/glasses"} style={{ textDecoration: "none" }}>
                 <div
                   className="img-item"
                   style={{
@@ -170,7 +170,7 @@ function CategoryList() {
             </div>
 
             <div className="item" style={{ backgroundColor: "#53D850" }}>
-              <Link to={"#"} style={{ textDecoration: "none" }}>
+              <Link to={"/category/cap"} style={{ textDecoration: "none" }}>
                 <div
                   className="img-item"
                   style={{
@@ -183,7 +183,7 @@ function CategoryList() {
             </div>
 
             <div className="item" style={{ backgroundColor: "#D8BA50" }}>
-              <Link to={"#"} style={{ textDecoration: "none" }}>
+              <Link to={"/category/tie"} style={{ textDecoration: "none" }}>
                 <div
                   className="img-item"
                   style={{
@@ -196,7 +196,7 @@ function CategoryList() {
             </div>
 
             <div className="item" style={{ backgroundColor: "#D85091" }}>
-              <Link to={"#"} style={{ textDecoration: "none" }}>
+              <Link to={"/category/dress"} style={{ textDecoration: "none" }}>
                 <div
                   className="img-item"
                   style={{
@@ -209,7 +209,7 @@ function CategoryList() {
             </div>
 
             <div className="item" style={{ backgroundColor: "#50D8AF" }}>
-              <Link to={"#"} style={{ textDecoration: "none" }}>
+              <Link to={"/category/format-suit"} style={{ textDecoration: "none" }}>
                 <div
                   className="img-item"
                   style={{
@@ -222,7 +222,7 @@ function CategoryList() {
             </div>
 
             <div className="item" style={{ backgroundColor: "#D85050" }}>
-              <Link to={"#"} style={{ textDecoration: "none" }}>
+              <Link to={"/category/accessories"} style={{ textDecoration: "none" }}>
                 <div
                   className="img-item"
                   style={{

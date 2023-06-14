@@ -30,24 +30,19 @@ function Detail() {
       .get(`${process.env.REACT_APP_BASE_URL}/product/${currentId}`)
       .then((result) => {
         setCurrentProduct(result?.data?.data[0]);
-        console.log(currentProduct);
+        setIsActive(0);
+        setImageId(currentProduct?.path[0]?.photo_path);
+        axios
+          .get(`${process.env.REACT_APP_BASE_URL}/product?category=${currentProduct?.product_category}`)
+          .then((response) => {
+            const relatedProductData = response?.data?.data;
+            setProductList(relatedProductData);
+          });
       })
       .catch((err) => {
         console.log(err);
       });
-    // axios
-    //   .get(`${process.env.REACT_APP_BASE_URL}/product/?category=${currentProduct?.category}`)
-    //   .then((response) => {
-    //     const relatedProductData = response?.data?.data;
-    //     setProductList(relatedProductData);
-    //   });
 
-
-  }, []);
-
-  useEffect(() => {
-    setIsActive(0);
-    setImageId(currentProduct?.path[0]?.photo_path);
   }, []);
 
   const changeImage = (index, img) => {
@@ -96,6 +91,7 @@ function Detail() {
       .then((result) => {
         console.log(result);
         localStorage.setItem('checkout', JSON.stringify(result?.data?.data));
+        localStorage.setItem('product', JSON.stringify(currentProduct));
         navigate("/checkout");
       })
       .catch((err) => {
@@ -103,6 +99,13 @@ function Detail() {
       });
   };
 
+  // Function to change price to rupiah format
+  const formatPrice = (price) => {
+    return new Intl.NumberFormat("id-ID", {
+      style: "currency",
+      currency: "IDR",
+    }).format(price);
+  }
 
   return (
     <div className="DetailProduct">
@@ -114,7 +117,8 @@ function Detail() {
             <div className="d-flex mb-3 justify-content-center">
               <img
                 className="img-product-big"
-                src={imageId}
+                //tenary opertator to check if imageid is available
+                src={imageId ? imageId : currentProduct?.path[0]?.photo_path}
                 alt="Image Product"
               />
             </div>
@@ -207,7 +211,7 @@ function Detail() {
                 </div>
               </div>
               <h6 className="text fw-light text-muted mt-3">Price</h6>
-              <h1 className="fw-bolder">Rp{currentProduct?.product_price}</h1>
+              <h1 className="fw-bolder">{formatPrice(currentProduct?.product_price)}</h1>
               <h6 className="text fw-bold mt-5">Color</h6>
               <div className="row">
                 <div
@@ -599,18 +603,24 @@ function Detail() {
           </div>
           <div className="row row-cols-md-5 rows-cols-xs-2">
             {
-              productList.map((product) => (
-                <div className="col">
-                  <ProductCard
-                    productId={product?.product_id}
-                    image={product?.path[0].photo_path}
-                    title={product?.product_name}
-                    price={product?.product_price}
-                    storeName={"Code Crafters"}
-                    rating={"4.8"}
-                  />
+              productList?.length > 0 ? (
+                productList.map((product) => (
+                  <div className="col">
+                    <ProductCard
+                      productId={product?.product_id}
+                      image={product?.path[0].photo_path}
+                      title={product?.product_name}
+                      price={product?.product_price}
+                      storeName={"Code Crafters"}
+                      rating={"4.8"}
+                    />
+                  </div>
+                ))
+              ) : (
+                <div className="col-12 col-md-12 col-lg-12 col-xl-12 mt-5">
+                  <p className="text-center">No products found</p>
                 </div>
-              ))
+              )
             }
           </div>
         </div>

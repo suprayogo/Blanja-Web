@@ -32,9 +32,9 @@ function Login() {
     });
 
     axios
-      .post(`${process.env.REACT_APP_BASE_URL}/auth/customer/login`, {
-        email: email,
-        password: password,
+      .post(`${process.env.REACT_APP_BASE_URL}/customer/login`, {
+        user_email: email,
+        user_password: password,
       })
       .then((result) => {
         Swal.fire({
@@ -44,10 +44,10 @@ function Login() {
         }).then(() => {
           console.log(result);
           localStorage.setItem("auth", "true");
-          localStorage.setItem("userId", result?.data?.data?.user?.id);
-          localStorage.setItem("userName", result?.data?.data?.user?.name);
-          localStorage.setItem("userPhoto", result?.data?.data?.user?.profile_photo);
-          localStorage.setItem("token", result?.data?.data?.token);
+          localStorage.setItem("userId", result?.data?.data?.user?.user_id);
+          localStorage.setItem("userName", result?.data?.data?.user?.user_name);
+          localStorage.setItem("userPhoto", result?.data?.data?.user?.user_photo);
+          localStorage.setItem("token", result?.data?.token);
           dispatch(addAuth(result));
           navigate("/");
         });

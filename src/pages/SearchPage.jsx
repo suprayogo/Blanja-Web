@@ -7,7 +7,7 @@ import ProductCard from "../components/ProductCard";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 
-function Products() {
+function SearchPage() {
   const location = useLocation();
   const [products, setProducts] = React.useState([]);
   const currentKeyword = location.pathname.split("/")[2];
@@ -18,7 +18,7 @@ function Products() {
     window.scrollTo(0, 0);
 
     axios
-      .get(`${process.env.REACT_APP_BASE_URL}/product?category=${currentKeyword}`)
+      .get(`${process.env.REACT_APP_BASE_URL}/product?keyword=${currentKeyword}`)
       .then((response) => {
         const productData = response?.data?.data;
         setProducts(productData);
@@ -33,7 +33,7 @@ function Products() {
       <section id="category">
         <div className="container mt-4">
           <div className="row">
-            <h2 className="fw-bold lh-1">{currentKeyword}</h2>
+            <h2 className="fw-bold lh-1">Keyword: {currentKeyword}</h2>
           </div>
           <div className="row row-cols-md-5 rows-cols-xs-2">
             {
@@ -65,4 +65,4 @@ function Products() {
   );
 }
 
-export default Products;
+export default SearchPage;

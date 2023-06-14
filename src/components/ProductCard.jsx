@@ -4,6 +4,15 @@ import "../style/components/ProductCard.scss";
 import { Link } from "react-router-dom";
 
 function ProductCard({ productId, image, title, price, storeName, rating }) {
+
+  // Function to change price to rupiah format
+  const formatPrice = (price) => {
+    return new Intl.NumberFormat("id-ID", {
+      style: "currency",
+      currency: "IDR",
+    }).format(price);
+  }
+
   return (
     <Link
       className="text-decoration-none"
@@ -15,7 +24,7 @@ function ProductCard({ productId, image, title, price, storeName, rating }) {
           <div className="card-body">
             <h5 className="product-title card-title">{title}</h5>
             <h5 className="price card-title" style={{ color: "#DB3022" }}>
-              Rp{price}
+              {formatPrice(price)}
             </h5>
             <small className="text text-muted">{storeName}</small>
             <div className="row my-2">

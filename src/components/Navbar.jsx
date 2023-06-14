@@ -3,8 +3,21 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import React from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function Navbar() {
+  const navigate = useNavigate();
+  const [keyword, setKeyword] = React.useState("");
+
+  // Function to handle search input and navigate to product page
+  const handleSearch = (e) => {
+    if (keyword === "") {
+      navigate("/");
+    } else {
+     navigate(`/search/${keyword}`);
+    }
+  };
+
   return (
     <div className="Navbar">
       <div className="row align-items-center">
@@ -25,6 +38,12 @@ function Navbar() {
                       type="text"
                       className="form-control decoration-none"
                       placeholder="Search Product"
+                      onChange={(e) => setKeyword(e.target.value)}
+                      onKeyDown={(e) => {
+                        if (e.keyCode === 13) {
+                          handleSearch();
+                        }
+                      }}
                     />
                     <FontAwesomeIcon
                       id="ic-search"
@@ -43,55 +62,101 @@ function Navbar() {
                   </div>
                 </div>
               </div>
-              <div className="action col-auto">
-                <div className="row align-items-center d-flex">
-                  <div className="col-auto me-3">
-                    <FontAwesomeIcon
-                      id="ic-shopping-cart"
-                      className="ic"
-                      icon="shopping-cart"
-                      size="lg"
-                      style={{ cursor: "pointer" }}
-                    />
-                  </div>
-                  <div className="col-auto btn-login">
-                    <Link to='/login'>
+              {localStorage.getItem("auth") ? (
+                <div className="action col-auto">
+                  <div className="row align-items-center d-flex">
+                    <div className="col-auto me-3">
+                      <FontAwesomeIcon
+                        id="ic-shopping-cart"
+                        className="ic"
+                        icon="shopping-cart"
+                        size="lg"
+                        style={{ cursor: "pointer" }}
+                      />
+                    </div>
+                    <div className="col-auto btn-login">
                       <button
                         type="button"
                         className="btn btn-primary border-2 rounded-pill"
+                        onClick={() => {
+                          localStorage.clear()
+                          window.location.href = "/login"
+                        }}
                       >
-                        Login
+                        Logout
                       </button>
-                    </Link>
-                  </div>
-                  <div className="col-auto btn-regis">
-                    <Link to='/register'>
+                    </div>
+                    <div className="col-auto d-flex justify-content-between align-items-center menu">
                       <button
+                        className="btn"
                         type="button"
-                        className="btn btn-light border-2 border rounded-pill"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#collapseExample"
+                        aria-expanded="false"
+                        aria-controls="collapseExample"
                       >
-                        Signup
+                        <FontAwesomeIcon
+                          icon="bars"
+                          size="lg"
+                          style={{ color: "white", cursor: "pointer" }}
+                        />
                       </button>
-                    </Link>
-                  </div>
-                  <div className="col-auto d-flex justify-content-between align-items-center menu">
-                    <button
-                      className="btn"
-                      type="button"
-                      data-bs-toggle="collapse"
-                      data-bs-target="#collapseExample"
-                      aria-expanded="false"
-                      aria-controls="collapseExample"
-                    >
-                      <FontAwesomeIcon
-                        icon="bars"
-                        size="lg"
-                        style={{ color: "white", cursor: "pointer" }}
-                      />
-                    </button>
+                    </div>
                   </div>
                 </div>
-              </div>
+              ) : (
+                <div className="action col-auto">
+                  <div className="row align-items-center d-flex">
+                    <div className="col-auto me-3">
+                      <FontAwesomeIcon
+                        id="ic-shopping-cart"
+                        className="ic"
+                        icon="shopping-cart"
+                        size="lg"
+                        style={{ cursor: "pointer" }}
+                      />
+                    </div>
+                    <div className="col-auto btn-login">
+                      <Link to='/login'>
+                        <button
+                          type="button"
+                          className="btn btn-primary border-2 rounded-pill"
+                        >
+                          Login
+                        </button>
+                      </Link>
+                    </div>
+                    <div className="col-auto btn-regis">
+                      <Link to='/register'>
+                        <button
+                          type="button"
+                          className="btn btn-light border-2 border rounded-pill"
+                        >
+                          Signup
+                        </button>
+                      </Link>
+                    </div>
+                    <div className="col-auto d-flex justify-content-between align-items-center menu">
+                      <button
+                        className="btn"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#collapseExample"
+                        aria-expanded="false"
+                        aria-controls="collapseExample"
+                      >
+                        <FontAwesomeIcon
+                          icon="bars"
+                          size="lg"
+                          style={{ color: "white", cursor: "pointer" }}
+                        />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              )
+              }
+
             </div>
           </div>
         </div>
@@ -100,24 +165,38 @@ function Navbar() {
           id="collapseExample"
         >
           <div className="card">
-            <ul className="list-group list-group-flush">
-              <li className="list-group-item">
-                <Link
-                  className="text-black text-decoration-none mb-3 text-center"
-                  to="/login"
-                >
-                  Login
-                </Link>
-              </li>
-              <li className="list-group-item">
-                <Link
-                  className="text-black text-decoration-none mb-3 text-center"
-                  to="/register"
-                >
-                  Register
-                </Link>
-              </li>
-            </ul>
+            {localStorage.getItem("auth") ? (
+              <ul className="list-group list-group-flush">
+                <li className="list-group-item">
+                  <button
+                    className="btn"
+                    type="button"
+                    onClick={() => {
+                      localStorage.clear()
+                      window.location.href = "/login"
+                    }}>Logout</button>
+                </li>
+              </ul>) : (
+              <ul className="list-group list-group-flush">
+                <li className="list-group-item">
+                  <Link
+                    className="text-black text-decoration-none mb-3 text-center"
+                    to="/login"
+                  >
+                    Login
+                  </Link>
+                </li>
+                <li className="list-group-item">
+                  <Link
+                    className="text-black text-decoration-none mb-3 text-center"
+                    to="/register"
+                  >
+                    Register
+                  </Link>
+                </li>
+              </ul>
+            )
+            }
           </div>
         </div>
       </div>

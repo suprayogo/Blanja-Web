@@ -9,6 +9,7 @@ function Register() {
 
   const [name, setName] = React.useState("");
   const [email, setEmail] = React.useState("");
+  const [phone_number, setPhoneNumber] = React.useState("");
   const [password, setPassword] = React.useState("");
 
   React.useEffect(() => {
@@ -29,10 +30,11 @@ function Register() {
     });
 
     axios
-      .post(`${process.env.REACT_APP_BASE_URL}/auth/customer/register`, {
-        name: name,
-        email: email,
-        password: password,
+      .post(`${process.env.REACT_APP_BASE_URL}/register/customer`, {
+        user_name: name,
+        user_email: email,
+        user_phonenumber: phone_number,
+        user_password: password,
       })
       .then((result) => {
         Swal.fire({
@@ -137,6 +139,17 @@ function Register() {
                   aria-describedby="emailHelp"
                   placeholder="Email"
                   onChange={(e) => setEmail(e.target.value)}
+                />
+              </div>
+              <div>
+                <label for="exampleInputPhone" className="form-label"></label>
+                <input
+                  type="text"
+                  className="form-control form-control-lg"
+                  id="exampleInputPhone"
+                  aria-describedby="emailHelp"
+                  placeholder="Phone Number"
+                  onChange={(e) => setPhoneNumber(e.target.value)}
                 />
               </div>
               <div className="mb-3">

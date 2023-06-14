@@ -30,6 +30,7 @@ function Dashboard() {
       });
   }, []);
 
+  
   return (
     <div className="Dashboard">
       <div className="row">
@@ -55,18 +56,24 @@ function Dashboard() {
             </div>
             <div className="row row-cols-md-5 rows-cols-xs-2">
               {
-                newProductList.map((newProduct) => (
-                  <div className="col">
-                    <ProductCard
-                      productId={newProduct?.product_id}
-                      image={newProduct?.path?.[0]?.photo_path}
-                      title={newProduct?.product_name}
-                      price={newProduct?.product_price}
-                      storeName={"Code Crafters"}
-                      rating={"4.8"}
-                    />
+                newProductList?.length > 0 ? (
+                  newProductList.map((newProduct) => (
+                    <div className="col">
+                      <ProductCard
+                        productId={newProduct?.product_id}
+                        image={newProduct?.path?.[0]?.photo_path}
+                        title={newProduct?.product_name}
+                        price={newProduct?.product_price}
+                        storeName={"Code Crafters"}
+                        rating={"4.8"}
+                      />
+                    </div>
+                  ))
+                ) : (
+                  <div className="col-12 col-md-12 col-lg-12 col-xl-12 mt-5">
+                    <p className="text-center">No products found</p>
                   </div>
-                ))
+                )
               }
             </div>
           </div>
@@ -82,18 +89,26 @@ function Dashboard() {
             </div>
             <div className="row row-cols-md-5 rows-cols-xs-2">
               {
-                popularProductList.map((popularProduct) => (
-                  <div className="col">
-                    <ProductCard
-                      productId={popularProduct?.product_id}
-                      image={popularProduct?.path?.[0]?.photo_path}
-                      title={popularProduct?.product_name}
-                      price={popularProduct?.product_price}
-                      storeName={"Code Crafters"}
-                      rating={"4.8"}
-                    />
+
+                popularProductList?.length > 0 ? (
+                  popularProductList.map((popularProduct) => (
+                    <div className="col">
+                      <ProductCard
+                        productId={popularProduct?.product_id}
+                        image={popularProduct?.path?.[0]?.photo_path}
+                        title={popularProduct?.product_name}
+                        price={popularProduct?.product_price}
+                        storeName={"Code Crafters"}
+                        rating={"4.8"}
+                      />
+                    </div>
+                  ))
+                ) : (
+                  <div className="col-12 col-md-12 col-lg-12 col-xl-12 mt-5">
+                    <p className="text-center">No products found</p>
                   </div>
-                ))
+                )
+
               }
             </div>
           </div>
