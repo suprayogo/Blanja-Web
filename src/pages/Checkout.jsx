@@ -2,8 +2,25 @@ import "../style/pages/Checkout.scss";
 
 import React from "react";
 import Navbar from "../components/Navbar";
+import axios from "axios";
 
 function Checkout() {
+  const [detail, setDetail] = React.useState(JSON.parse(localStorage.getItem("checkout")));
+  console.log(detail);
+
+  // Function to handle buy now button
+  const handlePayment = () => {
+    axios
+      .post(`${process.env.REACT_APP_BASE_URL}/create-payment`)
+      .then((result) => {
+        console.log(result);
+        window.snap.pay(result?.data?.token);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  
   return (
     <div className="Checkout">
       <Navbar />
@@ -93,6 +110,7 @@ function Checkout() {
                   id="btn-payment"
                   type="button"
                   className="btn btn-primary mt-3 border-2 border rounded-pill"
+                  onClick={handlePayment}
                 >
                   Select payment
                 </button>
