@@ -8,6 +8,11 @@ function Checkout() {
   const [detail, setDetail] = React.useState(JSON.parse(localStorage.getItem("checkout")));
   const [product, setProduct] = React.useState(JSON.parse(localStorage.getItem("product")));
 
+  // Check if auth is empty in local storage and redirect to login page
+  if (localStorage.getItem("auth") === null) {
+    window.location.href = "/login";
+  }
+
   console.log(detail[0]);
   console.log(product);
 
