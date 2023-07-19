@@ -14,7 +14,7 @@ function Navbar() {
     if (keyword === "") {
       navigate("/");
     } else {
-     navigate(`/search/${keyword}`);
+      navigate(`/search/${keyword}`);
     }
   };
 
@@ -74,17 +74,52 @@ function Navbar() {
                         style={{ cursor: "pointer" }}
                       />
                     </div>
-                    <div className="col-auto btn-login">
-                      <button
-                        type="button"
-                        className="btn btn-primary border-2 rounded-pill"
-                        onClick={() => {
-                          localStorage.clear()
-                          window.location.href = "/login"
-                        }}
-                      >
-                        Logout
-                      </button>
+                    <div id="ic-bell" className="col-auto me-3">
+                      <FontAwesomeIcon
+                        className="ic"
+                        icon="bell"
+                        size="lg"
+                        style={{ cursor: "pointer" }}
+                      />
+                    </div>
+                    <div id="ic-envelope" className="col-auto me-3">
+                      <FontAwesomeIcon
+                        className="ic"
+                        icon="envelope"
+                        size="lg"
+                        style={{ cursor: "pointer" }}
+                      />
+                    </div>
+                    <div id="img-profile" className="col-auto dropdown">
+                      <img
+                        className="img-profile rounded-circle"
+                        src="./assets/img/carousel-item-9.webp"
+                        alt="Profile"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                      />
+                      <ul className="dropdown-menu dropdown-menu-end justify-content-end text-end">
+                        <li>
+                          <button className="dropdown-item" type="button">
+                            Profile
+                          </button>
+                        </li>
+                        <li>
+                          <hr className="dropdown-divider" />
+                        </li>
+                        <li>
+                          <button
+                            className="dropdown-item"
+                            type="button"
+                            onClick={() => {
+                              localStorage.clear();
+                              window.location.href = "/login";
+                            }}
+                          >
+                            Logout
+                          </button>
+                        </li>
+                      </ul>
                     </div>
                     <div className="col-auto d-flex justify-content-between align-items-center menu">
                       <button
@@ -117,7 +152,7 @@ function Navbar() {
                       />
                     </div>
                     <div className="col-auto btn-login">
-                      <Link to='/login'>
+                      <Link to="/login">
                         <button
                           type="button"
                           className="btn btn-primary border-2 rounded-pill"
@@ -127,7 +162,7 @@ function Navbar() {
                       </Link>
                     </div>
                     <div className="col-auto btn-regis">
-                      <Link to='/register'>
+                      <Link to="/register">
                         <button
                           type="button"
                           className="btn btn-light border-2 border rounded-pill"
@@ -154,9 +189,7 @@ function Navbar() {
                     </div>
                   </div>
                 </div>
-              )
-              }
-
+              )}
             </div>
           </div>
         </div>
@@ -168,15 +201,34 @@ function Navbar() {
             {localStorage.getItem("auth") ? (
               <ul className="list-group list-group-flush">
                 <li className="list-group-item">
+                  <button className="btn" type="button">
+                    Profile
+                  </button>
+                </li>
+                <li className="list-group-item">
+                  <button className="btn" type="button">
+                    Notification
+                  </button>
+                </li>
+                <li className="list-group-item">
+                  <button className="btn" type="button">
+                    Message
+                  </button>
+                </li>
+                <li className="list-group-item">
                   <button
                     className="btn"
                     type="button"
                     onClick={() => {
-                      localStorage.clear()
-                      window.location.href = "/login"
-                    }}>Logout</button>
+                      localStorage.clear();
+                      window.location.href = "/login";
+                    }}
+                  >
+                    Logout
+                  </button>
                 </li>
-              </ul>) : (
+              </ul>
+            ) : (
               <ul className="list-group list-group-flush">
                 <li className="list-group-item">
                   <Link
@@ -195,8 +247,7 @@ function Navbar() {
                   </Link>
                 </li>
               </ul>
-            )
-            }
+            )}
           </div>
         </div>
       </div>

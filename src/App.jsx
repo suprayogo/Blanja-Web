@@ -18,6 +18,7 @@ import Products from "./pages/Products";
 import Detail from "./pages/Detail";
 import SearchPage from "./pages/SearchPage";
 import Checkout from "./pages/Checkout";
+import PaymentSuccess from "./pages/PaymentSuccess";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
@@ -28,6 +29,8 @@ import {
   faStar,
   faMinus,
   faPlus,
+  faBell,
+  faEnvelope,
 } from "@fortawesome/free-solid-svg-icons";
 library.add(
   faSliders,
@@ -36,7 +39,9 @@ library.add(
   faBars,
   faStar,
   faMinus,
-  faPlus
+  faPlus,
+  faBell,
+  faEnvelope
 );
 
 const router = createBrowserRouter([
@@ -76,20 +81,27 @@ const router = createBrowserRouter([
     path: "/checkout",
     element: <Checkout />,
   },
+  {
+    path: "/payment-success",
+    element: <PaymentSuccess />,
+  },
 ]);
 
 function App() {
-  axios.interceptors.request.use((config) => {
-    if (localStorage.getItem("token")) {
-      config.headers["Authorization"] = `Bearer ${localStorage.getItem(
-        "token"
-      )}`;
-    }
+  axios.interceptors.request.use(
+    (config) => {
+      if (localStorage.getItem("token")) {
+        config.headers["Authorization"] = `Bearer ${localStorage.getItem(
+          "token"
+        )}`;
+      }
 
-    return config;
-  }, (error) => {
-    Promise.reject(error);
-  });
+      return config;
+    },
+    (error) => {
+      Promise.reject(error);
+    }
+  );
 
   return (
     <div className="App">
