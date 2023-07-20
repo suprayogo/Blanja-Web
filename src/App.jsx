@@ -18,6 +18,9 @@ import Products from "./pages/Products";
 import Detail from "./pages/Detail";
 import SearchPage from "./pages/SearchPage";
 import Checkout from "./pages/Checkout";
+import Profile from "./pages/profile/profile";
+import ShipingAddres from "./pages/profile/ShipingAddres";
+import MyOrder from "./pages/profile/MyOrder";
 import PaymentSuccess from "./pages/PaymentSuccess";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -29,6 +32,8 @@ import {
   faStar,
   faMinus,
   faPlus,
+  faPencil,
+  faCalendarDays,
   faBell,
   faEnvelope,
 } from "@fortawesome/free-solid-svg-icons";
@@ -40,6 +45,8 @@ library.add(
   faStar,
   faMinus,
   faPlus,
+  faPencil,
+  faCalendarDays,
   faBell,
   faEnvelope
 );
@@ -82,9 +89,21 @@ const router = createBrowserRouter([
     element: <Checkout />,
   },
   {
+    path: "/profile",
+    element: <Profile />,
+  },
+  {
+    path: "/shipping-address",
+    element: <ShipingAddres />,
+  },
+  {
+    path: "/my-order",
+    element: <MyOrder />,
+  },
+  {
     path: "/payment-success",
     element: <PaymentSuccess />,
-  },
+  }
 ]);
 
 function App() {
