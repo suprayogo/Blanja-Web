@@ -66,6 +66,14 @@ $icon-color: #a5a5a5;
   .action {
     margin-left: 100px;
 
+    .img-profile {
+      height: 40px;
+      width: 40px;
+      cursor: pointer;
+      object-fit: cover;
+      object-position: center;
+    }
+
     .btn-primary {
       padding-left: 2rem;
       padding-right: 2rem;
@@ -143,12 +151,11 @@ $icon-color: #a5a5a5;
     .action {
       margin-left: 0px;
 
-      .btn-login {
-        display: none;
-        visibility: hidden;
-      }
-
-      .btn-regis {
+      .btn-login,
+      .btn-regis,
+      #img-profile,
+      #ic-bell,
+      #ic-envelope {
         display: none;
         visibility: hidden;
       }

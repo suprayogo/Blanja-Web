@@ -1,0 +1,38 @@
+.PaymentSuccess {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  justify-content: center;
+  align-items: center;
+
+  .card {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    .title {
+      width: 100%;
+
+      h1 {
+        color: #248b04;
+        font-weight: 700;
+      }
+    }
+
+    #ic-success {
+      height: 45%;
+      width: 45%;
+    }
+
+    .btn-confirm {
+      .btn-primary {
+        background-color: #248b04;
+        border-color: transparent;
+      }
+
+      .btn-primary:hover {
+        background-color: #1f7306;
+      }
+    }
+  }
+}
