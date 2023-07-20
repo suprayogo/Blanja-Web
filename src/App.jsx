@@ -21,6 +21,7 @@ import Checkout from "./pages/Checkout";
 import Profile from "./pages/profile/profile";
 import ShipingAddres from "./pages/profile/ShipingAddres";
 import MyOrder from "./pages/profile/MyOrder";
+import PaymentSuccess from "./pages/PaymentSuccess";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
@@ -33,6 +34,8 @@ import {
   faPlus,
   faPencil,
   faCalendarDays,
+  faBell,
+  faEnvelope,
 } from "@fortawesome/free-solid-svg-icons";
 library.add(
   faSliders,
@@ -43,7 +46,9 @@ library.add(
   faMinus,
   faPlus,
   faPencil,
-  faCalendarDays
+  faCalendarDays,
+  faBell,
+  faEnvelope
 );
 
 const router = createBrowserRouter([
@@ -95,20 +100,27 @@ const router = createBrowserRouter([
     path: "/my-order",
     element: <MyOrder />,
   },
+  {
+    path: "/payment-success",
+    element: <PaymentSuccess />,
+  }
 ]);
 
 function App() {
-  axios.interceptors.request.use((config) => {
-    if (localStorage.getItem("token")) {
-      config.headers["Authorization"] = `Bearer ${localStorage.getItem(
-        "token"
-      )}`;
-    }
+  axios.interceptors.request.use(
+    (config) => {
+      if (localStorage.getItem("token")) {
+        config.headers["Authorization"] = `Bearer ${localStorage.getItem(
+          "token"
+        )}`;
+      }
 
-    return config;
-  }, (error) => {
-    Promise.reject(error);
-  });
+      return config;
+    },
+    (error) => {
+      Promise.reject(error);
+    }
+  );
 
   return (
     <div className="App">

@@ -1,16 +1,16 @@
 .CategoryList {
   .item {
     border-radius: 15px;
-    width: 250px;
-    height: 250px;
+    width: 16vw;
+    height: 16vw;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
 
     .img-item {
-      width: 175px;
-      height: 175px;
+      width: 12vw;
+      height: 12vw;
       background-size: contain;
       background-repeat: no-repeat;
       background-position: center;
