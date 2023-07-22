@@ -1,148 +1,132 @@
-#shipping-address{
-    .page-content {
-        position: absolute;
-        background-color: white;
-        width: 65%;
-        height: 75%;
-        top: 20%;
-        left: 30%;
-        padding: 10px 10px;
-        border-radius: 5px;
-        transition: all 0.5s ease;
-        display: flex;
-        flex-direction: column;
+#shipping-address {
+  .page-content {
+    position: absolute;
+    background-color: white;
+    width: 65%;
+    height: 75%;
+    top: 20%;
+    left: 30%;
+    padding: 10px 10px;
+    border-radius: 5px;
+    transition: all 0.5s ease;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
 
-
-
-
-        .shipping-address button {
-            position: absolute;
-            border-style: dashed;
-            border-width: 2px;
-            border-radius: 10px;
-            width: 750px;
-            height: 86px;
-            right: 0;
-            left: 70px;
-            background-color: transparent !important;
-            color: #9b9b9b;
-            font-weight: 600;
-            cursor: pointer;
-          }
-      
-          .center h4 {
-            position: absolute;
-            text-align: center !important;
-            right: 170px;
-          }
-      
-          .btn-cancel {
-            position: relative;
-            background-color: transparent !important;
-            color: #9b9b9b !important;
-            border-color: #9b9b9b !important;
-            border-radius: 20px !important;
-            left: -1em;
-            width: 7em;
-          }
-      
-          .btn-save {
-            position: relative;
-            background-color: #db3022 !important;
-            color: white !important;
-            border-color: #db3022 !important;
-            border-radius: 20px !important;
-            left: -1em;
-            width: 7em;
-          }
-      
-          .shipping-address .box-address {
-            position: relative;
-            border-style: solid;
-            border-width: 1px;
-            border-radius: 10px;
-            width: 750px;
-            height: 210px;
-            right: 0;
-            left: 45px;
-            top: 120px;
-            background-color: transparent !important;
-            color: #db3022;
-            font-weight: 600;
-          }
-      
-          .box-address h4 {
-            position: relative;
-            margin-top: 30px;
-            left: 40px;
-            padding-left: 20;
-          }
-      
-          .box-address p {
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            left: 40px;
-            color: black;
-            font-weight: 400;
-          }
-      
-          .btn-change-address {
-            font-weight: 700 !important;
-            color: #db3022;
-            position: relative;
-      
-            left: 30px;
-          }
-
-
-
+    #custom-button {
+      position: relative;
+      border: 2px dashed #9b9b9b;
+      border-radius: 10px;
+      width: 80%;
+      height: 15vh;
+      right: 0;
+      left: 11vh;
+      background-color: transparent !important;
+      color: #9b9b9b;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .center h4 {
+      position: absolute;
+      text-align: center !important;
+      right: 170px;
+    }
+    .btn-cancel {
+      position: relative;
+      background-color: transparent !important ;
+      color: #9b9b9b !important;
+      border-color: #9b9b9b !important;
+      border-radius: 20px !important;
+      left: -1em;
+      width: 7em;
+    }
+  
+    .btn-save {
+      position: relative;
+      background-color: #db3022 !important ;
+      color: white !important;
+      border-color: #db3022 !important;
+      border-radius: 20px !important;
+      left: -1em;
+      width: 7em;
+    }
+  
+    .box-address {
+      position: relative;
+      border-style: solid;
+      border-width: 1px;
+      border-radius: 10px;
+      width: 88%;
+      height: 33vh;
+      right: 0;
+left: 6%;
+     top: 5%;
+      background-color: transparent !important;
+      color: #db3022;
+      font-weight: 600;
+    }
+  
+    .box-address h4 {
+      position: relative;
+      margin-top: 30px;
+      left: 5%;
+      padding-left: 20;
+    }
+    .box-address p {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      left: 5%;
+      color: black;
+      font-weight: 400;
+    }
+  
+    .btn-change-address {
+      font-weight: 700 !important;
+      color: #db3022;
+      position: relative;
+  
+      left: 3%;
+    }
+  }
 }
-
-
-}
-
-
-    
-
 
 @media screen and (max-width: 1024px) and (min-width: 768px) {
-    #shipping-address {
-      .page-content {
-        position: absolute;
-        width: 85%;
-        top: 10%;
-        left: 10%;
-        padding: 20px;
-  
-        background-color: red;
-      }
-  
-  
-  
+  #shipping-address {
+    .page-content {
+      position: absolute;
+      width: 85%;
+      top: 15%;
+      left: 10%;
+      padding: 20px;
+
+      background-color: white;
     }
-  
-  }
-  
-  
-  
-  @media screen and (max-width: 768px) {
-    #shipping-address {
-      .page-content {
-        position: absolute;
-        width: 75%;
-        height: 90%;
-        top: 12%;
-        left: 18%;
-        padding: 20px;
-        background-color: green;
-        z-index: 1;
-      }
-  
-  
-  
-  
+
+    #custom-button {
+      width: 100%;
+      height: 50%;
     }
-  
-  
   }
+}
+
+@media screen and (max-width: 768px) {
+  #shipping-address {
+    .page-content {
+      position: absolute;
+      width: 75%;
+      height: 90%;
+      top: 12%;
+      left: 18%;
+      padding: 20px;
+      background-color: white;
+      z-index: 1;
+    }
+
+    #custom-button {
+      right: 0;
+      left: 5vh !important;
+    }
+
+  }
+}

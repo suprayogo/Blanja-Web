@@ -1,9 +1,9 @@
 import React from "react";
-import Sidebar from "../../components/Sidebar";
+import Sidebar from "../components/Sidebar";
 import { NavLink } from "react-router-dom";
-import Navbar from "../../components/Navbar";
-import "../../style/pages/MyOrder.scss";
-function MyOrder() {
+import Navbar from "../components/Navbar";
+import "../style/pages/MyOrder.scss";
+function Sent() {
   return (
     <>
       <Navbar />
@@ -22,9 +22,9 @@ function MyOrder() {
                       ? "text-on text-decoration-none"
                       : "text-decoration-none"
                   }
-                  to="#"
+                  to="/all-items"
                 >
-                  {" "}
+          
                   All items
                 </NavLink>
 
@@ -97,29 +97,10 @@ function MyOrder() {
             <hr />
 
             <div className="my-order">
-              <h1>My Order History</h1>
-              <ul>
-                <li>
-                <img  className="img-responsive object-fit-cover"  src="./assets/img/pants.png" alt="Product 1" />
-                  <div class="order-details">
-                    <h2>Order ID: 12345</h2>
-                    <p>Product: Example Product 1</p>
-                    <p>Quantity: 2</p>
-                    <p>Harga: Rp 40.000.000</p>
-                    <p className="success-message">Success</p>
-                  </div>
-                </li>
-                <li>
-                  <img         className="img-responsive object-fit-cover"  src="./assets/img/dress.png" alt="Product 2" />
-                  <div class="order-details">
-                    <h2>Order ID: 67890</h2>
-                    <p>Product: Example Product 2</p>
-                    <p>Quantity: 1</p>
-                    <p>Harga: Rp 12.000.000</p>
-                    <p className="cancel-message">Cancel</p>
-                  </div>
-                </li>
-              </ul>
+              <h1>Empty</h1>
+            
+
+
             </div>
           </div>
         </div>
@@ -128,4 +109,4 @@ function MyOrder() {
   );
 }
 
-export default MyOrder;
+export default Sent;

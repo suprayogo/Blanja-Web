@@ -22,6 +22,12 @@ import Profile from "./pages/profile/profile";
 import ShipingAddres from "./pages/profile/ShipingAddres";
 import MyOrder from "./pages/profile/MyOrder";
 import PaymentSuccess from "./pages/PaymentSuccess";
+import NotYetPaid from "./components/NotYetPaid"
+import Packed from "./components/Packed";
+import Sent from "./components/Sent";
+import Completed from "./components/Completed";
+import OrderCancel from "./components/OrderCancel";
+import AllItems from "./components/AllItems";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
@@ -103,7 +109,32 @@ const router = createBrowserRouter([
   {
     path: "/payment-success",
     element: <PaymentSuccess />,
-  }
+  },
+  {
+    path: "/not-yet-paid",
+    element: <NotYetPaid />,
+  },
+  {
+    path: "/packed",
+    element: <Packed />,
+  },
+  {
+    path: "/sent",
+    element: <Sent />,
+  },
+  {
+    path: "/completed",
+    element: <Completed />,
+  },
+  {
+    path: "/all-items",
+    element: <AllItems />,
+  },
+  {
+    path: "/order-cancel",
+    element: <OrderCancel />,
+  },
+
 ]);
 
 function App() {
