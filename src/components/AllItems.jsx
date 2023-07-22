@@ -104,7 +104,7 @@ function AllItems() {
                   <div class="order-details">
                     <h2>Order ID: 12345</h2>
                     <p>Product: Example Product 1</p>
-                    <p>Quantity: 2</p>
+                    <p>Quantity: 1</p>
                     <p>Harga: Rp 40.000.000</p>
                     <p className="success-message">Success</p>
                   </div>
