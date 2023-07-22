@@ -1,0 +1,157 @@
+#my-order{
+    .page-content {
+        position: absolute;
+        background-color: white;
+        width: 65%;
+        height: 75%;
+        top: 20%;
+        left: 30%;
+        padding: 10px 10px;
+        border-radius: 5px;
+        transition: all 0.5s ease;
+        display: flex;
+        flex-direction: column;
+        overflow-y: auto;
+    
+        .my-order-nav {
+            position: relative;
+            right: 1em;
+          }
+        
+          .text-link a {
+            list-style: none;
+            padding: 14px 16px;
+            white-space: nowrap;
+            color: #9b9b9b;
+          }
+        
+          .text-link {
+            transition: all 0.32s ease 0s;
+          }
+        
+          .text-link a:hover {
+            color: #db3022;
+            font-weight: 600;
+            border-bottom: 3px solid #db3022;
+          }
+        
+          .text-on {
+            color: #db3022 !important;
+            font-weight: bold;
+            border-bottom: 3px solid #db3022;
+          }
+          .page-content p {
+            white-space: nowrap;
+            color: #9b9b9b;
+          }
+          
+          .page-content hr {
+            border-width: 1px;
+            border-color: #9b9b9b;
+          }
+          
+          .page-content button {
+            position: absolute;
+            background-color: #db3022 !important;
+            border: none;
+            color: white;
+            border-radius: 22px;
+            text-decoration: none;
+            right: 600px;
+            left: 165px;
+            padding: 10px 25px;
+          }
+
+
+          h1 {
+            text-align: center;
+            margin-bottom: 20px;
+          }
+      
+          ul {
+            list-style-type: none;
+            padding: 0;
+          }
+      
+          li {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 10px;
+            display: flex;
+          }
+      
+          li img {
+            max-width: 100px;
+            margin-right: 20px;
+          }
+      
+          li .order-details {
+            flex: 1;
+          }
+      
+          li h2 {
+            margin: 0;
+          }
+      
+          li p {
+            margin: 0;
+          }
+
+          .success-message {
+            color: green;
+          }
+          
+          .cancel-message {
+            color: red;
+          }
+      
+        }
+        
+       
+    
+    
+    }    
+
+
+    
+@media screen and (max-width: 1024px) and (min-width: 768px) {
+    #my-order {
+      .page-content {
+        position: absolute;
+        width: 85%;
+        top: 15%;
+        left: 10%;
+        padding: 20px;
+  
+        background-color: white;
+      }
+  
+      #custom-button {
+        width: 100%;
+        height: 50%;
+      }
+    }
+  }
+  
+  @media screen and (max-width: 768px) {
+    #my-order {
+      .page-content {
+        position: absolute;
+        width: 75%;
+        height: 90%;
+        top: 12%;
+        left: 18%;
+        padding: 20px;
+        background-color: white;
+        z-index: 1;
+      }
+  
+      #custom-button {
+        right: 0;
+        left: 5vh !important;
+      }
+  
+    }
+  }
+  

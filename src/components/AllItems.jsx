@@ -1,9 +1,9 @@
 import React from "react";
-import Sidebar from "../../components/Sidebar";
+import Sidebar from "../components/Sidebar";
 import { NavLink } from "react-router-dom";
-import Navbar from "../../components/Navbar";
-import "../../style/pages/MyOrder.scss";
-function MyOrder() {
+import Navbar from "../components/Navbar";
+import "../style/pages/MyOrder.scss";
+function AllItems() {
   return (
     <>
       <Navbar />
@@ -22,9 +22,9 @@ function MyOrder() {
                       ? "text-on text-decoration-none"
                       : "text-decoration-none"
                   }
-                  to="#"
+                  to="/all-items"
                 >
-                  {" "}
+              
                   All items
                 </NavLink>
 
@@ -88,7 +88,7 @@ function MyOrder() {
                       ? "text-on text-decoration-none"
                       : "text-decoration-none"
                   }
-                  to="/order-cancel"
+                  to="/order-check"
                 >
                   Order cancel
                 </NavLink>
@@ -128,4 +128,4 @@ function MyOrder() {
   );
 }
 
-export default MyOrder;
+export default AllItems;
