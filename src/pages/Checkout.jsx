@@ -3,18 +3,32 @@ import "../style/pages/Checkout.scss";
 import React from "react";
 import Navbar from "../components/Navbar";
 import axios from "axios";
+import { useLocation } from "react-router-dom";
 
 function Checkout() {
-  const [detail, setDetail] = React.useState(JSON.parse(localStorage.getItem("checkout")));
-  const [product, setProduct] = React.useState(JSON.parse(localStorage.getItem("product")));
+  const location = useLocation();
+  console.log(location.state);
+  const addresses = location.state.address;
+  const addressIdToFind = Number(location.state.address_id);
+  const address = addresses.find(
+    (address) => address.address_id === addressIdToFind
+  );
+  console.log(address);
+
+  const [detail, setDetail] = React.useState(
+    JSON.parse(localStorage.getItem("checkout"))
+  );
+  const [product, setProduct] = React.useState(
+    JSON.parse(localStorage.getItem("product"))
+  );
 
   // Check if auth is empty in local storage and redirect to login page
   if (localStorage.getItem("auth") === null) {
     window.location.href = "/login";
   }
 
-  console.log(detail[0]);
-  console.log(product);
+  // console.log(detail[0]);
+  // console.log(product);
 
   // Function to change price to rupiah format
   const formatPrice = (price) => {
@@ -22,14 +36,12 @@ function Checkout() {
       style: "currency",
       currency: "IDR",
     }).format(price);
-  }
+  };
 
   // Function to handle buy now button
   const handlePayment = () => {
     axios
-      .post(`${process.env.REACT_APP_BASE_URL}/create-payment`, {
-        total_payment: detail[0].total_price,
-      })
+      .post(`${process.env.REACT_APP_BASE_URL}/create-payment`)
       .then((result) => {
         console.log(result);
         window.snap.pay(result?.data?.token);
@@ -50,22 +62,25 @@ function Checkout() {
         <div className="row mt-4">
           <div className="col-md-8">
             <div className="row mb-4">
-              <h6 className="fw-bold">Shipping Address</h6>
               <div id="card-shipping" className="card mt-1">
                 <div className="card-body">
-                  <h6 className="card-title">Andreas Jane</h6>
-                  <p className="card-text">
-                    Perumahan Sapphire Mediterania, Wiradadi, Kec. Sokaraja,
-                    Kabupaten Banyumas, Jawa Tengah, 53181 [Tokopedia Note: blok
-                    c 16] Sokaraja, Kab. Banyumas, 53181
+                  <h6 className="fw-bold">
+                    {address?.recipient_name} ({address?.address_name})
+                  </h6>
+                  <p className="text fw-bold mb-0">
+                    {address?.recipient_phone_number}
                   </p>
-                  <button
+                  <h6 className="card-title">{address?.address_data}</h6>
+                  <p className="card-text">
+                    {address?.city} {address?.postal_code}
+                  </p>
+                  {/* <button
                     id="btn-address"
                     type="button"
                     className="btn btn-light border-2 border rounded-pill"
                   >
                     Choose another address
-                  </button>
+                  </button> */}
                 </div>
               </div>
             </div>
@@ -82,11 +97,15 @@ function Checkout() {
                       />
                     </div>
                     <div className="col-md-7">
-                      <h6 className="card-title fw-bold">{product.product_name} - {detail[0].product_color}</h6>
+                      <h6 className="card-title fw-bold">
+                        {product.product_name} - {detail[0].product_color}
+                      </h6>
                       <small className="text-muted">Code Crafters</small>
                     </div>
                     <div className="col-md-3 text-end">
-                      <h5 className="card-title fw-bold">{formatPrice(product.product_price)}</h5>
+                      <h5 className="card-title fw-bold">
+                        {formatPrice(product.product_price)}
+                      </h5>
                     </div>
                   </div>
                 </div>
@@ -102,7 +121,10 @@ function Checkout() {
                     <h6 className="fw-normal text-muted">Order</h6>
                   </div>
                   <div className="col-auto">
-                    <h6 className="fw-bold">{formatPrice(product.product_price)}</h6>
+                    <h6 className="fw-bold">
+                      {formatPrice(product.product_price)} (x
+                      {detail[0].total_product})
+                    </h6>
                   </div>
                 </div>
                 <div className="row justify-content-between">
@@ -110,7 +132,9 @@ function Checkout() {
                     <h6 className="fw-normal text-muted">Delivery</h6>
                   </div>
                   <div className="col-auto">
-                    <h6 className="fw-bold">{formatPrice(detail[0].shipping_price)}</h6>
+                    <h6 className="fw-bold">
+                      {formatPrice(detail[0].shipping_price)}
+                    </h6>
                   </div>
                 </div>
                 <hr className="solid" style={{ borderTop: "2px solid" }} />

@@ -1,9 +1,86 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "../../components/Navbar";
 import Sidebar from "../../components/Sidebar";
 import "../../style/pages/ShipingAdress.scss";
+import axios from "axios"; 
 
 function ShipingAddres() {
+  const [shippingAddress, setShippingAddress] = useState(null);
+  const [formData, setFormData] = useState({
+    address_name: "",
+    recipient_name: "",
+    address_data: "",
+    postal_code: "",
+    city: "",
+    recipient_phone_number: "",
+  });
+
+  const handleFormChange = (event) => {
+    const { name, value } = event.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+
+  //   const token = localStorage.getItem("token");
+
+  //   axios
+  //     .post("https://puzzled-jade-turtle.cyclic.app/customer/address", formData, {
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         Authorization: `Bearer ${token}`,
+  //       },
+  //     })
+  //     .then((response) => {
+  //       const data = response.data;
+  //       if (data.status) {
+  //         setShippingAddress(data.data);
+  //         setFormData({
+  //           address_name: "",
+  //           recipient_name: "",
+  //           address_data: "",
+  //           postal_code: "",
+  //           city: "",
+  //           recipient_phone_number: "",
+  //         });
+  //         // const modal = new bootstrap.Modal(
+  //         // //   document.getElementById("exampleModal")
+  //         // // );
+  //         // modal.hide();
+  //       } else {
+  //         console.error("Failed to add shipping address");
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error adding shipping address:", error);
+  //     });
+  // };
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    axios
+      .get("https://puzzled-jade-turtle.cyclic.app/customer/address", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        const data = response.data;
+        if (data.status && data.data.length > 0) {
+          setShippingAddress(data.data[0]);
+        } else {
+          console.error("Failed to fetch shipping address data");
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching shipping address data:", error);
+      });
+  }, []);
+
   return (
     <>
       <Navbar />
@@ -25,7 +102,7 @@ function ShipingAddres() {
                 data-bs-toggle="modal"
                 data-bs-target="#exampleModal"
               >
-                Open Modals
+                Add Address
               </button>
 
               {/* Bootstrap Modal */}
@@ -157,20 +234,17 @@ function ShipingAddres() {
 
            
 
-            <div className="box-address mt-2">
-              <h4 style={{ color: "black" }}>Irham Love Setiawan</h4>
-              <p>
-                Perumahan Sapphire Mediterania, Wiradadi,{" "}
-                <span>
-                  Kec. Sokaraja, Kabupaten Banyumas, Jawa Tengah, 53181{" "}
-                </span>
-                <span>
-                  [Tokopedia Note: blok c 16] Sokaraja, Kab. Banyumas, 53181
-                </span>
-              </p>
-              <span className="btn btn-change-address">Change address</span>
-            </div>
-        
+            {shippingAddress && (
+              <div className="box-address mt-2">
+                <h4 style={{ color: "black" }}>{shippingAddress.recipient_name}</h4>
+                <p>
+                  {shippingAddress.address_data}, {shippingAddress.city},{" "}
+                  <span>Postal Code: {shippingAddress.postal_code}</span>
+                  <span>Recipient's Phone: {shippingAddress.recipient_phone_number}</span>
+                </p>
+                <span className="btn btn-change-address">Change address</span>
+              </div>
+            )}
          
           </div>
         </div>

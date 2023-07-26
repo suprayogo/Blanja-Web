@@ -100,9 +100,11 @@ function Navbar() {
                       />
                       <ul className="dropdown-menu dropdown-menu-end justify-content-end text-end">
                         <li>
-                          <button className="dropdown-item" type="button">
-                            Profile
-                          </button>
+                          <Link to="/profile">
+                            <button className="dropdown-item" type="button">
+                              Profile
+                            </button>
+                          </Link>
                         </li>
                         <li>
                           <hr className="dropdown-divider" />
@@ -118,6 +120,7 @@ function Navbar() {
                           >
                             Logout
                           </button>
+
                         </li>
                       </ul>
                     </div>

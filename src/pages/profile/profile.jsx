@@ -1,8 +1,50 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "../../components/Navbar";
 import Sidebar from "../../components/Sidebar";
 import "../../style/pages/Profile.scss";
+import axios from 'axios';
+
 function Profile() {
+  const [userData, setUserData] = useState({
+    user_name: "",
+    user_email: "",
+    user_phonenumber: "",
+    gender: "",
+    date_of_birth: "",
+  });
+
+  useEffect(() => {
+    // Fetch user data from the API using the token from localStorage
+    const token = localStorage.getItem("token");
+  
+    axios
+      .get("https://puzzled-jade-turtle.cyclic.app/users", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        const data = response.data;
+        if (data.status) {
+          // If the API call is successful, update the state with the user data
+          setUserData({
+            user_name: data.data.user_name,
+            user_email: data.data.user_email,
+            user_phonenumber: data.data.user_phonenumber,
+            gender: data.data.gender || "", // Handle null gender
+            date_of_birth: data.data.date_of_birth || "", // Handle null date_of_birth
+          });
+        } else {
+          // Handle error, e.g., invalid token or API response
+          console.error("Failed to fetch user data");
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching user data:", error);
+      });
+  }, []);
+  
+
   return (
     <>
       <Navbar />
@@ -12,123 +54,116 @@ function Profile() {
           <div className="container-fluid">
             <h4 className="d-none d-md-block">My Profile</h4>
             <p className="d-none d-md-block">Manage your profile information</p>
-            <hr className="d-none d-md-block"/>
+            <hr className="d-none d-md-block" />
 
             <form action="">
-              <div className="row mt-2">
-                <div className="col-md-8 border-right mobile-position ">
-                  <div className="mb-2 row ">
-                    <label for="name" className="col-sm-3 col-form-label">
-                      Name
-                    </label>
-                    <div className="col">
-                      <input type="text" className="form-control" id="name" />
-                    </div>
-                  </div>
+              {/* ... Existing form fields ... */}
 
-                  <div className="mb-2 row ">
-                    <label for="email" className="col-sm-3 col-form-label">
-                      Email
-                    </label>
-                    <div className="col">
-                      <input type="text" className="form-control" id="email" />
-                    </div>
-                  </div>
-
-                  <div className="mb-2  row ">
-                    <label
-                      for="phone_number"
-                      className="col-sm-3 col-form-label"
-                    >
-                      Phone number
-                    </label>
-                    <div className="col">
-                      <input
-                        type="number"
-                        className="form-control"
-                        id="phone_number"
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                {/* --batas-- */}
-
-                <div className="col-md-4  btn-label ">
-                  <div className="d-flex flex-column align-items-center text-center">
-                    <img
-                      className="img-responsive object-fit-cover rounded-circle"
-                      src="./assets/img/you.png"
-                      height="100"
-                      width="100"
-                    />
-                  </div>
-
-                  {/* --  input only image  --  */}
+              <div className="mb-2 row ">
+                <label htmlFor="name" className="col-sm-3 col-form-label">
+                  Name
+                </label>
+                <div className="col">
                   <input
-                    type="file"
-                    id="upload-image"
-                    accept="image/* "
-                    className="col-md-8 order-md-1"
+                    type="text"
+                    className="form-control"
+                    id="name"
+                    value={userData.user_name}
+                    
                   />
-                  <label htmlFor="upload-image" className="mt-2 ">
-                    Select image
+                </div>
+              </div>
+
+              <div className="mb-2 row ">
+                <label htmlFor="email" className="col-sm-3 col-form-label">
+                  Email
+                </label>
+                <div className="col">
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="email"
+                    value={userData.user_email}
+                    
+                  />
+                </div>
+              </div>
+
+              <div className="mb-2  row ">
+                <label htmlFor="phone_number" className="col-sm-3 col-form-label">
+                  Phone number
+                </label>
+                <div className="col">
+                  <input
+                    type="number"
+                    className="form-control"
+                    id="phone_number"
+                    value={userData.user_phonenumber}
+      
+                  />
+                </div>
+              </div>
+
+              <div className="col-md-8 mobile-position ">
+                <div className=" row ">
+                  <label htmlFor="radio" className="col-sm-3 col-form-label ">
+                    Gender
                   </label>
-                </div>
-
-                {/* --Gender-- */}
-
-                <div className="col-md-8 mobile-position ">
-                  <div className=" row ">
-                    <label for="radio" className="col-sm-3 col-form-label ">
-                      Gender
-                    </label>
-                    <div className="col">
-                      <div className="form-check form-check-inline">
-                        <input
-                          className="form-check-input"
-                          type="radio"
-                          name="inlineRadioOptions"
-                          id="inlineRadio1"
-                          value="option1"
-                        />
-                        <label className="form-check-label" for="inlineRadio1">
-                          Laki-laki
-                        </label>
-                      </div>
-
-                      <div className="form-check form-check-inline">
-                        <input
-                          className="form-check-input"
-                          type="radio"
-                          name="inlineRadioOptions"
-                          id="inlineRadio2"
-                          value="option2"
-                        />
-                        <label className="form-check-label" for="inlineRadio2">
-                          Perempuan
-                        </label>
-                      </div>
+                  <div className="col">
+                    <div className="form-check form-check-inline">
+                      <input
+                        className="form-check-input"
+                        type="radio"
+                        name="inlineRadioOptions"
+                        id="inlineRadio1"
+                        value="option1"
+                        checked={userData.gender === "Laki-laki"}
+                        
+                      />
+                      <label className="form-check-label" htmlFor="inlineRadio1">
+                        Laki-laki
+                      </label>
                     </div>
-                  </div>
-                </div>
 
-                <div className="col-md-8 mobile-position">
-                  <div className="mb-3 row">
-                    <label for="date" className="col-sm-3 col-form-label">
-                      Date
-                    </label>
-
-                    <div className="col-12 col-md-5">
-                  <div className="input-group date">
-                    <input type="date" className="form-control" id="date" />
-                  </div>
-                </div>
+                    <div className="form-check form-check-inline">
+                      <input
+                        className="form-check-input"
+                        type="radio"
+                        name="inlineRadioOptions"
+                        id="inlineRadio2"
+                        value="option2"
+                        checked={userData.gender === "Perempuan"}
+                        
+                      />
+                      <label className="form-check-label" htmlFor="inlineRadio2">
+                        Perempuan
+                      </label>
+                    </div>
                   </div>
                 </div>
               </div>
 
-              <button type="submit" class="btn btn-md-primary btn-sm-primary mt-2 ">
+              <div className="col-md-8 mobile-position">
+                <div className="mb-3 row">
+                  <label htmlFor="date" className="col-sm-3 col-form-label">
+                    Date
+                  </label>
+
+                  <div className="col-12 col-md-5">
+                    <div className="input-group date">
+                      <input
+                        type="date"
+                        className="form-control"
+                        id="date"
+                        value={userData.date_of_birth}
+                        
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <button type="submit" className="btn btn-md-primary btn-sm-primary mt-2">
                 Save
               </button>
             </form>

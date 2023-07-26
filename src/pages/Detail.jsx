@@ -1,24 +1,54 @@
 import "../style/pages/Detail.scss";
-
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Navbar from "../components/Navbar";
 import ProductCard from "../components/ProductCard";
 import { useLocation, useNavigate } from "react-router";
 import { Link } from "react-router-dom";
+import Dropdown from "react-bootstrap/Dropdown";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
+import Accordion from "react-bootstrap/Accordion";
 
-import axios from 'axios';
+import axios from "axios";
 
 function Detail() {
   const navigate = useNavigate();
   const location = useLocation();
   const [imageId, setImageId] = useState(null);
   const [isActive, setIsActive] = useState(null);
-  const [selectedColor, setSelectedColor] = useState(null);
+  // const [selectedColor, setSelectedColor] = useState(null);
   const [countSize, setCountSize] = useState(1);
   const [countAmount, setCountAmount] = useState(1);
   const [currentProduct, setCurrentProduct] = useState(null);
   const [productList, setProductList] = useState([]);
+
+  // color
+  const [color, setColor] = useState([]);
+  const [selectedColor, setSelectedColor] = useState(null);
+  const changeColor = (color) => {
+    setSelectedColor(color);
+  };
+  // console.log(selectedColor);
+
+  //size
+  const [size, setSize] = useState([]);
+  const [selectedSize, setSelectedSize] = useState(null);
+  console.log(size);
+  const changeSize = (size) => {
+    setSelectedSize(size);
+  };
+
+  //address
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const [selectedAddress, setSelectedAddress] = useState(null);
+  const changeAddress = (address) => {
+    setSelectedAddress(address);
+  };
+  console.log(selectedAddress);
 
   useEffect(() => {
     const currentId = location.pathname.split("/")[2];
@@ -30,10 +60,14 @@ function Detail() {
       .get(`${process.env.REACT_APP_BASE_URL}/product/${currentId}`)
       .then((result) => {
         setCurrentProduct(result?.data?.data[0]);
+        setColor(result?.data?.data[0].product_color.split(", "));
+        setSize(result?.data?.data[0].product_size.split(", "));
         setIsActive(0);
         setImageId(currentProduct?.path[0]?.photo_path);
         axios
-          .get(`${process.env.REACT_APP_BASE_URL}/product?category=${currentProduct?.product_category}`)
+          .get(
+            `${process.env.REACT_APP_BASE_URL}/product?category=${currentProduct?.product_category}`
+          )
           .then((response) => {
             const relatedProductData = response?.data?.data;
             setProductList(relatedProductData);
@@ -42,7 +76,6 @@ function Detail() {
       .catch((err) => {
         console.log(err);
       });
-
   }, []);
 
   const changeImage = (index, img) => {
@@ -50,9 +83,9 @@ function Detail() {
     setImageId(img);
   };
 
-  const changeColor = (index) => {
-    setSelectedColor(index);
-  };
+  // const changeColor = (index) => {
+  //   setSelectedColor(index);
+  // };
 
   const incrementSize = () => {
     setCountSize(countSize + 1);
@@ -80,19 +113,23 @@ function Detail() {
   const handleBuyNow = () => {
     const currentId = location.pathname.split("/")[2];
     axios
-      .post(`${process.env.REACT_APP_BASE_URL}/product/createOrder`, null, {
-        params: {
-          product_id: currentId,
-          product_size: countSize,
-          product_color: 'Red',
-          total_product: countAmount,
-        }
+      .post(`${process.env.REACT_APP_BASE_URL}product/createOrder`, {
+        adds_id: selectedAddress,
+        product_id: currentId,
+        product_size: selectedSize,
+        product_color: selectedColor,
+        total_product: countAmount,
       })
       .then((result) => {
         console.log(result);
-        localStorage.setItem('checkout', JSON.stringify(result?.data?.data));
-        localStorage.setItem('product', JSON.stringify(currentProduct));
-        navigate("/checkout");
+        localStorage.setItem("checkout", JSON.stringify(result?.data?.data));
+        localStorage.setItem("product", JSON.stringify(currentProduct));
+        navigate("/checkout", {
+          state: {
+            address_id: selectedAddress,
+            address: address,
+          },
+        });
       })
       .catch((err) => {
         console.log(err);
@@ -105,7 +142,47 @@ function Detail() {
       style: "currency",
       currency: "IDR",
     }).format(price);
-  }
+  };
+  const [address, setAddress] = useState([]);
+  const handleGetAddress = () => {
+    axios
+      .get(`${process.env.REACT_APP_BASE_URL}address`)
+      .then((result) => {
+        console.log(result.data?.data);
+        setAddress(result?.data?.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const address_name = useRef();
+  const recipient_name = useRef();
+  const recipient_phone_number = useRef();
+  const address_data = useRef();
+  const postal_code = useRef();
+  const city = useRef();
+
+  const handleSubmitAddress = (e) => {
+    e.preventDefault();
+    axios
+      .post(`${process.env.REACT_APP_BASE_URL}customer/address`, {
+        address_name: address_name.current.value,
+        recipient_name: recipient_name.current.value,
+        recipient_phone_number: recipient_phone_number.current.value,
+        address_data: address_data.current.value,
+        postal_code: postal_code.current.value,
+        city: city.current.value,
+      })
+      .then((result) => {
+        console.log(result);
+        handleGetAddress();
+        setAddress([...address, result?.data?.data]);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  };
 
   return (
     <div className="DetailProduct">
@@ -125,8 +202,9 @@ function Detail() {
             <div className="d-flex mt-3 justify-content-center overflow-hidden">
               <div className="col-auto">
                 <img
-                  className={`img-product-small ${isActive === 0 ? "active" : ""
-                    }`}
+                  className={`img-product-small ${
+                    isActive === 0 ? "active" : ""
+                  }`}
                   src={currentProduct?.path[0]?.photo_path}
                   alt="Image Product"
                   onClick={(e) =>
@@ -136,8 +214,9 @@ function Detail() {
               </div>
               <div className="col-auto">
                 <img
-                  className={`img-product-small ${isActive === 1 ? "active" : ""
-                    }`}
+                  className={`img-product-small ${
+                    isActive === 1 ? "active" : ""
+                  }`}
                   src={currentProduct?.path[1]?.photo_path}
                   alt="Image Product"
                   onClick={(e) =>
@@ -147,8 +226,9 @@ function Detail() {
               </div>
               <div className="col-auto">
                 <img
-                  className={`img-product-small ${isActive === 2 ? "active" : ""
-                    }`}
+                  className={`img-product-small ${
+                    isActive === 2 ? "active" : ""
+                  }`}
                   src={currentProduct?.path[2]?.photo_path}
                   alt="Image Product"
                   onClick={(e) =>
@@ -158,8 +238,9 @@ function Detail() {
               </div>
               <div className="col-auto">
                 <img
-                  className={`img-product-small ${isActive === 3 ? "active" : ""
-                    }`}
+                  className={`img-product-small ${
+                    isActive === 3 ? "active" : ""
+                  }`}
                   src={currentProduct?.path[3]?.photo_path}
                   alt="Image Product"
                   onClick={(e) =>
@@ -211,55 +292,59 @@ function Detail() {
                 </div>
               </div>
               <h6 className="text fw-light text-muted mt-3">Price</h6>
-              <h1 className="fw-bolder">{formatPrice(currentProduct?.product_price)}</h1>
+              <h1 className="fw-bolder">
+                {formatPrice(currentProduct?.product_price)}
+              </h1>
               <h6 className="text fw-bold mt-5">Color</h6>
               <div className="row">
-                <div
-                  className={`d-flex select-color col-auto rounded-circle ${selectedColor === 0 ? "active" : ""
-                    }`}
-                  onClick={(e) => changeColor(0)}
-                >
-                  <div
-                    className="color-item rounded-circle"
-                    style={{ backgroundColor: "#000000" }}
-                  />
-                </div>
-                <div
-                  className={`d-flex select-color col-auto rounded-circle ${selectedColor === 1 ? "active" : ""
-                    }`}
-                  onClick={(e) => changeColor(1)}
-                >
-                  <div
-                    className="color-item rounded-circle"
-                    style={{ backgroundColor: "#D84242" }}
-                  />
-                </div>
-                <div
-                  className={`d-flex select-color col-auto rounded-circle ${selectedColor === 2 ? "active" : ""
-                    }`}
-                  onClick={(e) => changeColor(2)}
-                >
-                  <div
-                    className="color-item rounded-circle"
-                    style={{ backgroundColor: "#4290D8" }}
-                  />
-                </div>
-                <div
-                  className={`d-flex select-color col-auto rounded-circle ${selectedColor === 3 ? "active" : ""
-                    }`}
-                  onClick={(e) => changeColor(3)}
-                >
-                  <div
-                    className="color-item rounded-circle"
-                    style={{ backgroundColor: "#42D86C" }}
-                  />
-                </div>
+                <Dropdown>
+                  <Dropdown.Toggle variant="success" id="dropdown-basic">
+                    {selectedColor ? selectedColor : "Select Color"}
+                  </Dropdown.Toggle>
+
+                  <Dropdown.Menu>
+                    {Array.isArray(color) && color.length > 0 ? (
+                      color.map((color, index) => (
+                        <Dropdown.Item
+                          key={index}
+                          onClick={() => changeColor(color)}
+                        >
+                          {color}
+                        </Dropdown.Item>
+                      ))
+                    ) : (
+                      <Dropdown.Item>No product color available</Dropdown.Item>
+                    )}
+                  </Dropdown.Menu>
+                </Dropdown>
               </div>
               <div className="row mt-4">
                 <div className="col-md-3">
                   <h6 className="text fw-bold">Size</h6>
                   <div className="row d-flex align-items-center">
-                    <div className="col-auto">
+                    <Dropdown>
+                      <Dropdown.Toggle variant="success" id="dropdown-basic">
+                        {selectedSize ? selectedSize : "Select Size"}
+                      </Dropdown.Toggle>
+
+                      <Dropdown.Menu>
+                        {Array.isArray(size) && size.length > 0 ? (
+                          size.map((size, index) => (
+                            <Dropdown.Item
+                              key={index}
+                              onClick={() => changeSize(size)}
+                            >
+                              {size}
+                            </Dropdown.Item>
+                          ))
+                        ) : (
+                          <Dropdown.Item>
+                            No product size available
+                          </Dropdown.Item>
+                        )}
+                      </Dropdown.Menu>
+                    </Dropdown>
+                    {/* <div className="col-auto">
                       <button
                         id="btn-inc-dec"
                         type="button"
@@ -273,8 +358,8 @@ function Detail() {
                           size="sm"
                         />
                       </button>
-                    </div>
-                    <div className="col-auto d-flex justify-content-center align-items-center">
+                    </div> */}
+                    {/* <div className="col-auto d-flex justify-content-center align-items-center">
                       <h5 className="lh-1 text-center">{countSize}</h5>
                     </div>
                     <div className="col-auto">
@@ -286,7 +371,7 @@ function Detail() {
                       >
                         <FontAwesomeIcon className="ic" icon="plus" size="sm" />
                       </button>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
                 <div className="col-md-3">
@@ -348,7 +433,12 @@ function Detail() {
                     id="btn-buy"
                     type="button"
                     className="btn btn-primary border-2 rounded-pill"
-                    onClick={handleBuyNow}
+                    // onClick={handleBuyNow}
+                    onClick={() => {
+                      handleShow();
+                      handleGetAddress();
+                    }}
+                    disabled={selectedColor && selectedSize ? false : true}
                   >
                     Buy Now
                   </button>
@@ -365,7 +455,9 @@ function Detail() {
         </div>
         <div id="condition" className="row mt-5">
           <h4>Condition</h4>
-          <h4 style={{ color: "#DB3022" }}>{currentProduct?.product_condition}</h4>
+          <h4 style={{ color: "#DB3022" }}>
+            {currentProduct?.product_condition}
+          </h4>
         </div>
         <div id="description" className="row mt-5">
           <h4>Description</h4>
@@ -602,29 +694,163 @@ function Detail() {
             <p className="text-muted lh-1">You’ve never seen it before!</p>
           </div>
           <div className="row row-cols-md-5 rows-cols-xs-2">
-            {
-              productList?.length > 0 ? (
-                productList.map((product) => (
-                  <div className="col">
-                    <ProductCard
-                      productId={product?.product_id}
-                      image={product?.path[0].photo_path}
-                      title={product?.product_name}
-                      price={product?.product_price}
-                      storeName={"Code Crafters"}
-                      rating={"4.8"}
-                    />
-                  </div>
-                ))
-              ) : (
-                <div className="col-12 col-md-12 col-lg-12 col-xl-12 mt-5">
-                  <p className="text-center">No products found</p>
+            {productList?.length > 0 ? (
+              productList.map((product) => (
+                <div className="col">
+                  <ProductCard
+                    productId={product?.product_id}
+                    image={product?.path[0].photo_path}
+                    title={product?.product_name}
+                    price={product?.product_price}
+                    storeName={"Code Crafters"}
+                    rating={"4.8"}
+                  />
                 </div>
-              )
-            }
+              ))
+            ) : (
+              <div className="col-12 col-md-12 col-lg-12 col-xl-12 mt-5">
+                <p className="text-center">No products found</p>
+              </div>
+            )}
           </div>
         </div>
       </section>
+
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Address</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Accordion defaultActiveKey="0">
+            <Accordion.Item eventKey="0">
+              <Accordion.Header>Choose Address</Accordion.Header>
+              <Accordion.Body>
+                {address?.length > 0 ? (
+                  address.map((item, index) => (
+                    <div className="container" key={index}>
+                      <div className="form-check flex-column mb-3">
+                        <div className="row">
+                          <div className="col-1">
+                            <input
+                              className="form-check-input"
+                              type="radio"
+                              name="flexRadioDefault"
+                              id="flexRadioDefault1"
+                              value={item.address_id}
+                              onChange={(e) => {
+                                changeAddress(e.target.value);
+                              }}
+                            />
+                          </div>
+                          <div className="col-10">
+                            <h6 className="text fw-bold mb-0">
+                              {item?.recipient_name} ({item?.address_name})
+                            </h6>
+                            <p className="text fw-bold mb-0">
+                              {item?.recipient_phone_number}
+                            </p>
+                            <p
+                              className="text mb-0"
+                              style={{
+                                width: "100%",
+                                overflowWrap: "break-word",
+                              }}
+                            >
+                              {item?.address_data}
+                            </p>
+                            <p className="text mb-0">
+                              {item?.city} {item?.postal_code}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                      <hr
+                        style={{ border: "none", borderTop: "3px solid black" }}
+                      />
+                    </div>
+                  ))
+                ) : (
+                  <p>There are no addresses.</p>
+                )}
+              </Accordion.Body>
+            </Accordion.Item>
+            <Accordion.Item eventKey="1">
+              <Accordion.Header>Add Address</Accordion.Header>
+              <Accordion.Body>
+                <form onSubmit={handleSubmitAddress}>
+                  <label for="allAddress" className="form-label">
+                    Save address as (ex : home address, office address)
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="allAddress"
+                    placeholder="Rumah"
+                    ref={address_name}
+                  />
+                  <label for="name" className="form-label">
+                    Recipient’s name
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="recipient_name"
+                    ref={recipient_name}
+                  />
+                  <label for="address" className="form-label">
+                    Address
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="address"
+                    ref={address_data}
+                  />
+                  <label for="telphone_number" className="form-label">
+                    Recipient's telephone number
+                  </label>
+                  <input
+                    type="number"
+                    className="form-control mb-2"
+                    id="telphone_number"
+                    ref={recipient_phone_number}
+                  />
+                  <label for="postal_code" className="form-label">
+                    Postal code{" "}
+                  </label>
+                  <input
+                    type="number"
+                    className="form-control"
+                    id="postal_code"
+                    ref={postal_code}
+                  />
+                  <label for="city" className="form-label">
+                    City or Subdistrict{" "}
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control mb-2"
+                    id="city"
+                    ref={city}
+                  />
+                  <button type="submit" class="btn btn-success">
+                    Add Address
+                  </button>
+                </form>
+              </Accordion.Body>
+            </Accordion.Item>
+          </Accordion>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button
+            variant="danger"
+            onClick={handleBuyNow}
+            disabled={selectedAddress ? false : true}
+          >
+            Order Now
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 }
