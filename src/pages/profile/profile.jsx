@@ -65,16 +65,17 @@ function Profile() {
       payload.user_email = email;
     }
 
-    if (currentProfilePhoto !== profilePhoto) {
-      handleUploadPhoto();
-    }
+    // if (currentProfilePhoto !== profilePhoto) {
+    //   console.log(currentProfilePhoto)
+    //   console.log(profilePhoto)
+    //   handleUploadPhoto();
+    // }
 
     axios
       .patch(`${process.env.REACT_APP_BASE_URL}/edit/customer`, payload)
       .then((response) => {
         setLoading(false);
         localStorage.setItem("userName", response?.data?.data[0].user_name);
-        localStorage.setItem("userPhoto", response?.data?.data[0].user_photo);
         Swal.fire({
           title: "Success",
           text: "Update Profile Success!",
@@ -84,10 +85,11 @@ function Profile() {
       })
       .catch((error) => {
         setLoading(false);
-        console.error(error?.response?.data?.message);
+        console.log(error?.response?.data?.message);
+        navigate('/profile')
         Swal.fire({
           title: "Failed",
-          text: "Update Profile Failed",
+          text: error?.response?.data?.message ? error?.response?.data?.message : "Update Profile Failed",
           icon: "error",
         })
       })
@@ -110,14 +112,27 @@ function Profile() {
   }
 
   const handleUploadPhoto = () => {
+    const token = localStorage.getItem("token");
     setLoading(true);
     const formData = new FormData()
     formData.append("user_photo", profilePhoto)
     axios.patch(`${process.env.REACT_APP_BASE_URL}/users/photo`, formData, {
       headers: {
         "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${token}`,
       },
     })
+      .then((response) => {
+        setLoading(false);
+        // localStorage.setItem("userName", response?.data?.data[0].user_name);
+        console.log(response?.data?.data[0].user_photo);
+        Swal.fire({
+          title: "Success",
+          text: "Update Profile Success!",
+          icon: "success",
+        })
+        navigate('/profile')
+      })
       .catch((error) => {
         setLoading(false);
         console.log(error)
@@ -149,7 +164,7 @@ function Profile() {
               isUpdateMode ? (
                 <form onSubmit={(e) => e.preventDefault()}>
 
-                  <div className="mb-2 row">
+                  {/* <div className="mb-2 row">
                     <label htmlFor="profilePhoto" className="col-sm-3 col-form-label">
                       Profile Photo
                     </label>
@@ -169,7 +184,7 @@ function Profile() {
                         accept="image/*"
                       />
                     </div>
-                  </div>
+                  </div> */}
 
                   <div className="mb-2 row ">
                     <label htmlFor="name" className="col-sm-3 col-form-label">
