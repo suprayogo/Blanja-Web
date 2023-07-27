@@ -9,15 +9,17 @@ import Dropdown from "react-bootstrap/Dropdown";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Accordion from "react-bootstrap/Accordion";
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 
 import axios from "axios";
 
 function Detail() {
   const navigate = useNavigate();
   const location = useLocation();
+  const [loading, setLoading] = useState(false);
   const [imageId, setImageId] = useState(null);
   const [isActive, setIsActive] = useState(null);
-  // const [selectedColor, setSelectedColor] = useState(null);
   const [countSize, setCountSize] = useState(1);
   const [countAmount, setCountAmount] = useState(1);
   const [currentProduct, setCurrentProduct] = useState(null);
@@ -52,13 +54,12 @@ function Detail() {
 
   useEffect(() => {
     const currentId = location.pathname.split("/")[2];
-    console.log(currentId);
-
+    setLoading(true);
     window.scrollTo(0, 0);
-
     axios
       .get(`${process.env.REACT_APP_BASE_URL}/product/${currentId}`)
       .then((result) => {
+        setLoading(false);
         setCurrentProduct(result?.data?.data[0]);
         setColor(result?.data?.data[0].product_color.split(", "));
         setSize(result?.data?.data[0].product_size.split(", "));
@@ -74,6 +75,7 @@ function Detail() {
           });
       })
       .catch((err) => {
+        setLoading(false);
         console.log(err);
       });
   }, []);
@@ -82,10 +84,6 @@ function Detail() {
     setIsActive(index);
     setImageId(img);
   };
-
-  // const changeColor = (index) => {
-  //   setSelectedColor(index);
-  // };
 
   const incrementSize = () => {
     setCountSize(countSize + 1);
@@ -111,29 +109,14 @@ function Detail() {
 
   // Function to handle buy now button
   const handleBuyNow = () => {
-    const currentId = location.pathname.split("/")[2];
-    axios
-      .post(`${process.env.REACT_APP_BASE_URL}product/createOrder`, {
-        adds_id: selectedAddress,
-        product_id: currentId,
+    navigate("/checkout", {
+      state: {
+        product: currentProduct,
         product_size: selectedSize,
         product_color: selectedColor,
         total_product: countAmount,
-      })
-      .then((result) => {
-        console.log(result);
-        localStorage.setItem("checkout", JSON.stringify(result?.data?.data));
-        localStorage.setItem("product", JSON.stringify(currentProduct));
-        navigate("/checkout", {
-          state: {
-            address_id: selectedAddress,
-            address: address,
-          },
-        });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+      },
+    });
   };
 
   // Function to change price to rupiah format
@@ -156,34 +139,6 @@ function Detail() {
       });
   };
 
-  const address_name = useRef();
-  const recipient_name = useRef();
-  const recipient_phone_number = useRef();
-  const address_data = useRef();
-  const postal_code = useRef();
-  const city = useRef();
-
-  const handleSubmitAddress = (e) => {
-    e.preventDefault();
-    axios
-      .post(`${process.env.REACT_APP_BASE_URL}customer/address`, {
-        address_name: address_name.current.value,
-        recipient_name: recipient_name.current.value,
-        recipient_phone_number: recipient_phone_number.current.value,
-        address_data: address_data.current.value,
-        postal_code: postal_code.current.value,
-        city: city.current.value,
-      })
-      .then((result) => {
-        console.log(result);
-        handleGetAddress();
-        setAddress([...address, result?.data?.data]);
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
-  };
-
   return (
     <div className="DetailProduct">
       <Navbar />
@@ -192,43 +147,60 @@ function Detail() {
         <div className="row">
           <div className="col-4">
             <div className="d-flex mb-3 justify-content-center">
-              <img
-                className="img-product-big"
-                //tenary opertator to check if imageid is available
-                src={imageId ? imageId : currentProduct?.path[0]?.photo_path}
-                alt="Image Product"
-              />
+              {
+                !loading ? (
+                  <img
+                    className="img-product-big"
+                    //tenary opertator to check if imageid is available
+                    src={imageId ? imageId : currentProduct?.path[0]?.photo_path}
+                    alt="Image Product"
+                  />
+                ) : (
+                  <Skeleton width={'300'} height={'300'} />
+                )
+              }
             </div>
             <div className="d-flex mt-3 justify-content-center overflow-hidden">
               <div className="col-auto">
-                <img
-                  className={`img-product-small ${
-                    isActive === 0 ? "active" : ""
-                  }`}
-                  src={currentProduct?.path[0]?.photo_path}
-                  alt="Image Product"
-                  onClick={(e) =>
-                    changeImage(0, currentProduct?.path[0]?.photo_path)
-                  }
-                />
+                {
+                  !loading ?
+                    (
+                      <img
+                        className={`img-product-small ${isActive === 0 ? "active" : ""
+                          }`}
+                        src={currentProduct?.path[0]?.photo_path}
+                        alt="Image Product"
+                        onClick={(e) =>
+                          changeImage(0, currentProduct?.path[0]?.photo_path)
+                        }
+                      />
+                    ) : (
+                      <Skeleton width={'50'} height={'50'} />
+                    )
+                }
+              </div>
+              <div className="col-auto">
+                {
+                  !loading ?
+                    (
+                      <img
+                        className={`img-product-small ${isActive === 1 ? "active" : ""
+                          }`}
+                        src={currentProduct?.path[1]?.photo_path}
+                        alt="Image Product"
+                        onClick={(e) =>
+                          changeImage(0, currentProduct?.path[1]?.photo_path)
+                        }
+                      />
+                    ) : (
+                      <Skeleton width={'50'} height={'50'} />
+                    )
+                }
               </div>
               <div className="col-auto">
                 <img
-                  className={`img-product-small ${
-                    isActive === 1 ? "active" : ""
-                  }`}
-                  src={currentProduct?.path[1]?.photo_path}
-                  alt="Image Product"
-                  onClick={(e) =>
-                    changeImage(1, currentProduct?.path[1]?.photo_path)
-                  }
-                />
-              </div>
-              <div className="col-auto">
-                <img
-                  className={`img-product-small ${
-                    isActive === 2 ? "active" : ""
-                  }`}
+                  className={`img-product-small ${isActive === 2 ? "active" : ""
+                    }`}
                   src={currentProduct?.path[2]?.photo_path}
                   alt="Image Product"
                   onClick={(e) =>
@@ -238,9 +210,8 @@ function Detail() {
               </div>
               <div className="col-auto">
                 <img
-                  className={`img-product-small ${
-                    isActive === 3 ? "active" : ""
-                  }`}
+                  className={`img-product-small ${isActive === 3 ? "active" : ""
+                    }`}
                   src={currentProduct?.path[3]?.photo_path}
                   alt="Image Product"
                   onClick={(e) =>
@@ -252,7 +223,7 @@ function Detail() {
           </div>
           <div className="col-8">
             <div className="row ms-2">
-              <h2 className="fw-bold">{currentProduct?.product_name}</h2>
+              <h2 className="fw-bold">{currentProduct?.product_name || <Skeleton width={'300'}/> }</h2>
               <h6 className="text text-muted">Code Crafters</h6>
               <div className="row my-2">
                 <div className="ic-rating col-auto pe-0">
@@ -293,7 +264,7 @@ function Detail() {
               </div>
               <h6 className="text fw-light text-muted mt-3">Price</h6>
               <h1 className="fw-bolder">
-                {formatPrice(currentProduct?.product_price)}
+                {formatPrice(currentProduct?.product_price) || <Skeleton width={'300'} />}
               </h1>
               <h6 className="text fw-bold mt-5">Color</h6>
               <div className="row">
@@ -433,11 +404,11 @@ function Detail() {
                     id="btn-buy"
                     type="button"
                     className="btn btn-primary border-2 rounded-pill"
-                    // onClick={handleBuyNow}
-                    onClick={() => {
-                      handleShow();
-                      handleGetAddress();
-                    }}
+                    onClick={handleBuyNow}
+                    // onClick={() => {
+                    //   handleShow();
+                    //   handleGetAddress();
+                    // }}
                     disabled={selectedColor && selectedSize ? false : true}
                   >
                     Buy Now
@@ -456,13 +427,13 @@ function Detail() {
         <div id="condition" className="row mt-5">
           <h4>Condition</h4>
           <h4 style={{ color: "#DB3022" }}>
-            {currentProduct?.product_condition}
+            {currentProduct?.product_condition || <Skeleton width={'300'} />}
           </h4>
         </div>
         <div id="description" className="row mt-5">
           <h4>Description</h4>
           <p className="text text-muted">
-            {currentProduct?.product_description}
+            {currentProduct?.product_description || <Skeleton width={'300'} />}
           </p>
         </div>
         <div id="product-review" className="row mt-5">
@@ -716,7 +687,7 @@ function Detail() {
         </div>
       </section>
 
-      <Modal show={show} onHide={handleClose}>
+      {/* <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Address</Modal.Title>
         </Modal.Header>
@@ -850,7 +821,7 @@ function Detail() {
             Order Now
           </Button>
         </Modal.Footer>
-      </Modal>
+      </Modal> */}
     </div>
   );
 }

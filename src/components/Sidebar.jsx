@@ -4,6 +4,9 @@ import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "../style/components/Sidebar.scss";
 function Sidebar() {
+  const userPhoto = localStorage.getItem("userPhoto");
+  const userName = localStorage.getItem("userName");
+
   return (
     <>
       {/* This is sidebar START */}
@@ -14,12 +17,12 @@ function Sidebar() {
               <div className="user-picture  mt-5">
                 <img
                   className="img-responsive object-fit-cover rounded-circle"
-                  src="./assets/img/you.png"
+                  src={userPhoto}
                   height="70"
                   width="70"
                 />
                 <div>
-                  <h5 className="h5">Mr bean mark blacker nasution</h5>
+                  <h5 className="h5">{userName}</h5>
                   <FontAwesomeIcon
                     id="ic-pencil"
                     className="ic hide-on-mobile"
@@ -28,7 +31,7 @@ function Sidebar() {
                     style={{ color: "#e5e5e5", marginLeft: "10px" }}
                   />
 
-                  <Link className="li  text-decoration-none" to="/profile">
+                  <Link className="li  text-decoration-none" to="/profile?act=update">
                     Ubah profile
                   </Link>
                 </div>

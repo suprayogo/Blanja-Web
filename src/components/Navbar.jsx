@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 function Navbar() {
   const navigate = useNavigate();
   const [keyword, setKeyword] = React.useState("");
+  const userPhoto = localStorage.getItem("userPhoto");
 
   // Function to handle search input and navigate to product page
   const handleSearch = (e) => {
@@ -93,7 +94,7 @@ function Navbar() {
                     <div id="img-profile" className="col-auto dropdown">
                       <img
                         className="img-profile rounded-circle"
-                        src="./assets/img/carousel-item-9.webp"
+                        src={ userPhoto ? userPhoto : "./assets/img/carousel-item-9.webp" }
                         alt="Profile"
                         data-bs-toggle="dropdown"
                         aria-expanded="false"
