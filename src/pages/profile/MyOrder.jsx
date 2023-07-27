@@ -7,10 +7,6 @@ import axios from "axios"
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 
-// import CardOrder from "../../components/myOrder/cardOrder";
-// import NavbarOrder from "../../components/myOrder/navbarOrder";
-
-
 function MyOrder() {
   const navigate = useNavigate()
   const [loading, setLoading] = useState(false);
@@ -157,6 +153,47 @@ function MyOrder() {
          {/* <NavbarOrder/>
        <CardOrder/> */}
 
+            <div className="my-order">
+              <ul>
+                {
+                  !loading ? (
+                    order?.length > 0 ? (
+                      order.map((item, index) => {
+                        const product = products.find((p) => p.product_id === item.product_id);
+                        return (
+                          <li key={index}>
+                            <>
+                              <img className="img-responsive object-fit-cover" src={product?.path[0]?.photo_path} alt="Product" />
+                              <div className="order-details">
+                                <h2>Order ID: {item.order_id || <Skeleton />} </h2>
+                                <p>Product: {product?.product_name || <Skeleton />}</p>
+                                <p>Quantity: {item.total_product || <Skeleton />}</p>
+                                <p>Harga: {item.total_price || <Skeleton />}</p>
+                                <p className="success-message">Success</p>
+                              </div>
+                            </>
+                          </li>
+                        );
+                      })
+                    ) : (
+                      <p>Order Not Found</p>
+                    )
+                  ) : (
+                    <li>
+                        <>
+                          <div className="order-details">
+                            <h2>{ <Skeleton  width={500}/>} </h2>
+                            <p>{ <Skeleton  width={300}/>}</p>
+                            <p>{ <Skeleton  width={300}/>}</p>
+                            <p>{ <Skeleton  width={300}/>}</p>
+                            <p className="success-message">{ <Skeleton width={100} />}</p>
+                          </div>
+                        </>
+                      </li>
+                  )
+                }
+              </ul>
+            </div>
           </div>
         </div>
       </main>
