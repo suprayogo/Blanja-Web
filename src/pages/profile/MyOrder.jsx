@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom"
 import Sidebar from "../../components/Sidebar";
-import { NavLink } from "react-router-dom";
 import Navbar from "../../components/Navbar";
 import "../../style/pages/MyOrder.scss";
 import axios from "axios"
