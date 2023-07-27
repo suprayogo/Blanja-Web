@@ -39,7 +39,10 @@ function Sidebar() {
 
               <ul className="mt-5 side-link" id="side-link-list">
                 <li>
+                <NavLink to="/profile">
                   <img src="/assets/img/user.png" />
+
+                </NavLink>
                   <NavLink
                     className={({ isActive, isPending }) =>
                       `text-decoration-none ${
@@ -48,12 +51,15 @@ function Sidebar() {
                     }
                     to="/profile"
                   >
-                    My account
+                     &nbsp; My account
                   </NavLink>
                 </li>
 
                 <li>
+                  <NavLink   to="/shipping-address">
+                    
                   <img src="/assets/img/location.png" />
+                  </NavLink>
                   <NavLink
                     className={({ isActive, isPending }) =>
                       `text-decoration-none ${
@@ -62,12 +68,15 @@ function Sidebar() {
                     }
                     to="/shipping-address"
                   >
-                    Shiping Address
+                      &nbsp;Shiping Address
                   </NavLink>
                 </li>
 
                 <li>
+                  <NavLink     to="/my-order">
+
                   <img src="/assets/img/history.png" />
+                  </NavLink>
                   <NavLink
                     className={({ isActive, isPending }) =>
                       `text-decoration-none ${
@@ -76,7 +85,7 @@ function Sidebar() {
                     }
                     to="/my-order"
                   >
-                    My order
+                   &nbsp; My order
                   </NavLink>
                 </li>
               </ul>
