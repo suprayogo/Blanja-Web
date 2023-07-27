@@ -27,7 +27,7 @@ function PaymentSuccess() {
             <button
               className="btn btn-primary rounded-pill px-4 py-2"
               onClick={() => {
-                window.location.href = "/login";
+                window.location.href = "/";
               }}
             >
               Back to Application

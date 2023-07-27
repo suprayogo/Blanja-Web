@@ -44,9 +44,9 @@ function Login() {
         }).then(() => {
           console.log(result);
           localStorage.setItem("auth", "true");
-          localStorage.setItem("userId", result?.data?.data?.user?.user_id);
-          localStorage.setItem("userName", result?.data?.data?.user?.user_name);
-          localStorage.setItem("userPhoto", result?.data?.data?.user?.user_photo);
+          localStorage.setItem("userId", result?.data?.data[0].user_id);
+          localStorage.setItem("userName", result?.data?.data[0].user_name);
+          localStorage.setItem("userPhoto", result?.data?.data[0].user_photo);
           localStorage.setItem("token", result?.data?.token);
           dispatch(addAuth(result));
           navigate("/");
