@@ -115,31 +115,45 @@ function Checkout() {
 
   const handleCheckOut = () => {
     setLoading(true);
+
     axios
-      .post(`${process.env.REACT_APP_BASE_URL}/product/createOrder`, {
-        adds_id: selectedAddress.address_id,
-        product_id: product.product_id,
-        product_size: productSize,
-        product_color: productColor,
-        total_product: totalProduct,
-      })
+      .post(`${process.env.REACT_APP_BASE_URL}/create-payment`)
       .then((result) => {
-        console.log(result);
+        console.log(result?.data?.transactionToken);
+        window.snap.pay(result?.data?.data?.transactionToken);
+
         axios
-          .post(`${process.env.REACT_APP_BASE_URL}/create-payment`)
+          .post(`${process.env.REACT_APP_BASE_URL}/product/createOrder`, {
+            adds_id: selectedAddress.address_id,
+            product_id: product.product_id,
+            product_size: productSize,
+            product_color: productColor,
+            total_product: totalProduct,
+          })
           .then((result) => {
-            setLoading(false);
-            console.log(result?.data?.transactionToken);
-            window.snap.pay(result?.data?.data?.transactionToken);
+            console.log(result);
           })
           .catch((err) => {
             setLoading(false);
             console.log(err);
+            console.error(error?.response?.data?.message);
+            Swal.fire({
+              title: "Failed",
+              text: "Failed Create Order",
+              icon: "error",
+            });
           });
+          
       })
       .catch((err) => {
         setLoading(false);
         console.log(err);
+        console.error(error?.response?.data?.message);
+        Swal.fire({
+          title: "Failed",
+          text: "Failed Select Payment",
+          icon: "error",
+        });
       });
   };
 
