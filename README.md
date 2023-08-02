@@ -40,14 +40,26 @@ The backend repository for this project can be found on GitHub at the following 
 
 ## Screenshots 📸
 
-<table>
+<table> 
+   <tr>
+    <td>Home Page</td>
+    <td>Detail Page</td>
+  </tr>
    <tr>
     <td><img width="350px" src="./screenshot/Home.png" border="0" alt="Login" /></td>
     <td> <img width="350px" src="./screenshot/Detail.png" border="0"  alt="Detail" /></td>
   </tr>
+    <tr>
+    <td>Login Page</td>
+    <td>Register Page</td>
+  </tr>
    <tr>
     <td><img width="350px" src="./screenshot/Login.png" border="0" alt="Login" /></td>
     <td> <img width="350px" src="./screenshot/Register.png" border="0"  alt="Register" /></td>
+  </tr>
+    <tr>
+    <td>Checkout Page</td>
+    <td>Profile Page</td>
   </tr>
    <tr>
     <td><img width="350px" src="./screenshot/Checkout.png" border="0" alt="Login" /></td>
