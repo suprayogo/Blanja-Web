@@ -30,7 +30,7 @@ function Dashboard() {
       });
 
     axios
-      .get(`${process.env.REACT_APP_BASE_URL}/product/`)
+      .get(`${process.env.REACT_APP_BASE_URL}/product?sortType=dsc`)
       .then((response) => {
         setLoading(false);
         const popularProductData = response?.data?.data;
