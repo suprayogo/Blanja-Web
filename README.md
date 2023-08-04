@@ -65,6 +65,14 @@ The backend repository for this project can be found on GitHub at the following 
     <td><img width="350px" src="./screenshot/Checkout.jpeg" border="0" alt="Login" /></td>
     <td> <img width="350px" src="./screenshot/Profile.jpeg" border="0"  alt="Register" /></td>
   </tr>
+    <tr>
+    <td>Order Page</td>
+    <td>Address Page</td>
+  </tr>
+   <tr>
+    <td><img width="350px" src="./screenshot/Order.jpeg" border="0" alt="Order" /></td>
+    <td> <img width="350px" src="./screenshot/Address.jpeg" border="0"  alt="Address" /></td>
+  </tr>
 </table>
 
 ## Getting Started 🏁🚀
