@@ -46,8 +46,8 @@ The backend repository for this project can be found on GitHub at the following 
     <td>Detail Page</td>
   </tr>
    <tr>
-    <td><img width="350px" src="./screenshot/Home2.jpeg" border="0" alt="Home" /></td>
-    <td> <img width="350px" src="./screenshot/Detail.png" border="0"  alt="Detail" /></td>
+    <td><img width="350px" src="./screenshot/Home.jpeg" border="0" alt="Home" /></td>
+    <td> <img width="350px" src="./screenshot/Detail.jpeg" border="0"  alt="Detail" /></td>
   </tr>
     <tr>
     <td>Login Page</td>
@@ -62,8 +62,8 @@ The backend repository for this project can be found on GitHub at the following 
     <td>Profile Page</td>
   </tr>
    <tr>
-    <td><img width="350px" src="./screenshot/Checkout.png" border="0" alt="Login" /></td>
-    <td> <img width="350px" src="./screenshot/Profile.png" border="0"  alt="Register" /></td>
+    <td><img width="350px" src="./screenshot/Checkout.jpeg" border="0" alt="Login" /></td>
+    <td> <img width="350px" src="./screenshot/Profile.jpeg" border="0"  alt="Register" /></td>
   </tr>
    </tr>
     <tr>
