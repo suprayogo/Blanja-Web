@@ -92,7 +92,7 @@ As part of a project team, contributions to "Blanja" were made collectively. For
 
 ## License 📜📝
 
-As the specific licensing information for "Blanja" may vary based on the project team's decisions, please refer to the LICENSE file in the project repository for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## Contact 📞📧
 
