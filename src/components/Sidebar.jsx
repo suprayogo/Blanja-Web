@@ -17,7 +17,7 @@ function Sidebar() {
               <div className="user-picture  mt-5">
                 <img
                   className="img-responsive object-fit-cover rounded-circle"
-                  src={userPhoto}
+                  src="./assets/img/profile.png"
                   height="70"
                   width="70"
                 />

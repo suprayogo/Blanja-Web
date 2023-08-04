@@ -269,11 +269,11 @@ function Detail() {
               <h6 className="text fw-bold mt-5">Color</h6>
               <div className="row">
                 <Dropdown>
-                  <Dropdown.Toggle variant="success" id="dropdown-basic">
+                  <Dropdown.Toggle variant="danger" id="dropdown-basic">
                     {selectedColor ? selectedColor : "Select Color"}
                   </Dropdown.Toggle>
 
-                  <Dropdown.Menu>
+                  <Dropdown.Menu >
                     {Array.isArray(color) && color.length > 0 ? (
                       color.map((color, index) => (
                         <Dropdown.Item
@@ -294,7 +294,7 @@ function Detail() {
                   <h6 className="text fw-bold">Size</h6>
                   <div className="row d-flex align-items-center">
                     <Dropdown>
-                      <Dropdown.Toggle variant="success" id="dropdown-basic">
+                      <Dropdown.Toggle variant="danger" id="dropdown-basic">
                         {selectedSize ? selectedSize : "Select Size"}
                       </Dropdown.Toggle>
 

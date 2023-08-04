@@ -94,7 +94,7 @@ function Navbar() {
                     <div id="img-profile" className="col-auto dropdown">
                       <img
                         className="img-profile rounded-circle"
-                        src={ userPhoto ? userPhoto : "./assets/img/carousel-item-9.webp" }
+                        src={"/assets/img/profile.png" }
                         alt="Profile"
                         data-bs-toggle="dropdown"
                         aria-expanded="false"
