@@ -30,7 +30,7 @@ function Dashboard() {
       });
 
     axios
-      .get(`${process.env.REACT_APP_BASE_URL}/product?sortType=dsc`)
+      .get(`${process.env.REACT_APP_BASE_URL}/product?page=1&by=review`)
       .then((response) => {
         setLoading(false);
         const popularProductData = response?.data?.data;
@@ -163,8 +163,8 @@ function Dashboard() {
             <div className="row row-cols-md-5 rows-cols-xs-2">
               {
                 !loading ? (
-                  newProductList?.length > 0 ? (
-                    newProductList.map((newProduct) => (
+                  popularProductList?.length > 0 ? (
+                    popularProductList.map((newProduct) => (
                       <div className="col">
                         <ProductCard
                           productId={newProduct?.product_id}
