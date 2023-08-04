@@ -136,7 +136,7 @@ function Checkout() {
           .catch((err) => {
             setLoading(false);
             console.log(err);
-            console.error(error?.response?.data?.message);
+            // console.error(error?.response?.data?.message);
             Swal.fire({
               title: "Failed",
               text: "Failed Create Order",
@@ -148,7 +148,7 @@ function Checkout() {
       .catch((err) => {
         setLoading(false);
         console.log(err);
-        console.error(error?.response?.data?.message);
+        // console.error(error?.response?.data?.message);
         Swal.fire({
           title: "Failed",
           text: "Failed Select Payment",
