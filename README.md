@@ -2,7 +2,7 @@
 
 ## Project Description 🚀
 
-"Blanja" is a project portfolio that I have collaborated on as part of a project team. This platform is an e-commerce website that specifically focuses on fashion products. With a user-friendly interface and a wide range of fashion items, "Blanja" provides users with a convenient and engaging online shopping experience.
+Blanja is a project portfolio that I have collaborated on as part of a project team. This platform is an e-commerce website that specifically focuses on fashion products. With a user-friendly interface and a wide range of fashion items, Blanja provides users with a convenient and engaging online shopping experience.
 
 ## Technologies Used 💻🛠️
 
