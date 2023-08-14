@@ -1,8 +1,11 @@
-# Blanja Portfolio 🛍️👗👠
+<h3 align="center">Blanja</h3>
+<p align="center">
+  <a href="https://blanja-fe-sigma.vercel.app/">View Demo</a>
+</p>
 
 ## Project Description 🚀
 
-Blanja is a project portfolio that I have collaborated on as part of a project team. This platform is an e-commerce website that specifically focuses on fashion products. With a user-friendly interface and a wide range of fashion items, Blanja provides users with a convenient and engaging online shopping experience.
+"Blanja" is a project portfolio that I have collaborated on as part of a project team. This platform is an e-commerce website that specifically focuses on fashion products. With a user-friendly interface and a wide range of fashion items, "Blanja" provides users with a convenient and engaging online shopping experience.
 
 ## Technologies Used 💻🛠️
 
@@ -21,10 +24,6 @@ The Blanja project is built using the following technologies:
 - Node.Js (JavaScript runtime)
 - Axios (HTTP client)
 
-## Project Repository 📂🔗
-
-The backend repository for this project can be found on GitHub at the following link:
-[Blanja Backend Repository](https://github.com/IrhamNfrnda/blanja-be)
 
 ## Features ✨🛍️👕👖
 
@@ -38,66 +37,69 @@ The backend repository for this project can be found on GitHub at the following 
 - Interactive alerts with Sweet Alert
 - Asynchronous data handling with Axios
 
+ 
+<!-- GETTING STARTED -->
+## Getting Started
+
+### Installation
+- Clone This Repository
+
+`https://github.com/suprayogo/blanja-fe.git`
+
+- Install Module
+
+`npm install`
+
+- Setting .env
+
+```bash
+ [ Api Deploy ] : https://rich-teal-camel-tutu.cyclic.app
+```
+
+### Executing program
+
+- Run this project with `npm run dev`.
+
+
 ## Screenshots 📸
 
-<table> 
-   <tr>
-    <td>Home Page</td>
-    <td>Detail Page</td>
-  </tr>
-   <tr>
-    <td><img width="350px" src="./screenshot/Home.jpeg" border="0" alt="Home" /></td>
-    <td> <img width="350px" src="./screenshot/Detail.jpeg" border="0"  alt="Detail" /></td>
-  </tr>
-    <tr>
-    <td>Login Page</td>
-    <td>Register Page</td>
-  </tr>
-   <tr>
-    <td><img width="350px" src="./screenshot/Login.png" border="0" alt="Login" /></td>
-    <td> <img width="350px" src="./screenshot/Register.png" border="0"  alt="Register" /></td>
-  </tr>
-    <tr>
-    <td>Checkout Page</td>
-    <td>Profile Page</td>
-  </tr>
-   <tr>
-    <td><img width="350px" src="./screenshot/Checkout.jpeg" border="0" alt="Login" /></td>
-    <td> <img width="350px" src="./screenshot/Profile.jpeg" border="0"  alt="Register" /></td>
-  </tr>
-    <tr>
-    <td>Order Page</td>
-    <td>Address Page</td>
-  </tr>
-   <tr>
-    <td><img width="350px" src="./screenshot/Order.jpeg" border="0" alt="Order" /></td>
-    <td> <img width="350px" src="./screenshot/Address.jpeg" border="0"  alt="Address" /></td>
-  </tr>
-</table>
+## Tabel Screenshot
 
-## Getting Started 🏁🚀
+| Home Page      | Detail Page    |
+|--------------- |---------------|
+| ![Home Page](./screenshot/Home.jpeg) | ![Detail Page](./screenshot/Detail.jpeg) |
 
-To set up the Blanja project locally, follow these steps:
+| Login Page     | Register Page  |
+|--------------- |---------------|
+| ![Login Page](./screenshot/Login.png) | ![Register Page](./screenshot/Register.png) |
 
-1. Clone the repository from the provided link.
-2. Install the required dependencies using npm.
-3. Set up your database and update the configuration accordingly.
-4. Ensure you have Node.js and npm installed on your system.
-5. Start the development server using the command `npm start`.
-6. Access the project through your preferred web browser.
+| Checkout Page  | Profile Page   |
+|--------------- |---------------|
+| ![Checkout Page](./screenshot/Checkout.png) | ![Profile Page](./screenshot/Profile.jpeg) |
 
-## Contributions 🤝🌟
+| Order Page     | Address Page   |
+|--------------- |---------------|
+| ![Order Page](./screenshot/Order.jpeg) | ![Address Page](./screenshot/Address.jpeg) |
 
-As part of a project team, contributions to "Blanja" were made collectively. For specific inquiries or suggestions, please contact the project team members through the GitHub repository.
 
-## License 📜📝
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+## Related Project
 
-## Contact 📞📧
+- [Blanja BE ](https://github.com/suprayogo/blanja-be)
+- [Blanja Demo](https://blanja-fe-sigma.vercel.app/)
 
-If you have any questions or inquiries regarding this project, feel free to contact me at [irhamnfrnda@gmail.com](mailto:irhamnfrnda@gmail.com).
+## Authors
 
----
+Contributors names and contact info project team in blanja front-end:
 
-Thank you for exploring my Blanja portfolio. "Blanja" has been an exciting project to work on, and we hope that it showcases our skills and passion for creating an engaging e-commerce platform. Happy shopping! 🛍️👠👗
+1. Isnan Arif Cahyadi
+
+- [Linkedin](https://www.linkedin.com/in/isnanarifcahyadi/)
+
+2. Rizki Suprayogo
+
+- [Linkedin](https://www.linkedin.com/in/rizki-suprayogo/)
+
+3. Irham Nofrianda
+
+- [Linkedin](https://www.linkedin.com/in/irhamnfrnda/)
