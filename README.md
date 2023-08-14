@@ -1,6 +1,6 @@
 <h3 align="center">Blanja</h3>
 <p align="center">
-  <a href="https://blanja-fe-sigma.vercel.app/">View Demo</a>
+  <a href="https://blanja-web.vercel.app">View Demo</a>
 </p>
 
 ## Project Description 🚀
