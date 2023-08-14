@@ -86,7 +86,7 @@ The Blanja project is built using the following technologies:
 ## Related Project
 
 - [Blanja BE ](https://github.com/suprayogo/blanja-be)
-- [Blanja Demo](https://blanja-fe-sigma.vercel.app/)
+- [Blanja Demo](https://blanja-web.vercel.app)
 
 ## Authors
 
